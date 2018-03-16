@@ -2,6 +2,7 @@ const hljs = require('highlight.js')
 const cheerio = require('cheerio')
 const chalk = require('chalk')
 const stripAnsi = require('strip-ansi')
+const merge = require('deepmerge')
 
 const DARK_COLORS = {
 	BASE: ['white'],
@@ -22,23 +23,6 @@ const DARK_COLORS = {
 	REGEXP: ['magenta'],
 	LINE_NUMBERS: ['gray', 'dim']
 }
-
-// Light Colors
-// const LIGHT_COLORS = {
-// 	BASE: ['bgWhite', 'black', 'bold'],
-// 	KEYWORD: ['red'],
-// 	NUMBER: ['blue'],
-// 	FUNCTION: ['black'],
-// 	TITLE: ['blue'],
-// 	PARAMS: ['black'],
-// 	STRING: ['black'],
-// 	BUILT_IN: ['magenta'],
-// 	LITERAL: ['blue'],
-// 	ATTR: ['black'],
-// 	TRAILING_SPACE: [],
-// 	REGEXP: ['blue'],
-// 	LINE_NUMBERS: ['bgBlue', 'white']
-// }
 
 const chalkify = styleAry => {
 	if (!styleAry) {
@@ -103,11 +87,14 @@ const syntaxHlStr = (lang, script, opts) => {
 	const code = hljs.highlight(lang, script).value
 	const lines = code.split('\n')
 
-	lines.forEach(line => {
+	lines.forEach((line, lineNumber) => {
 		const html = `<code>${line}</code>`
 		const $body = cheerio.load(html).root().find('code')[0]
 		const text = filter($body, opts)
-		output += text + '\n'
+		output += text
+		if (lineNumber !== lines.length - 1) {
+			output += '\n'
+		}
 	})
 
 	return output
@@ -122,11 +109,6 @@ const syntaxHlJson = (json, opts) => {
 	}, opts.indent)
 
 	try {
-		// json = json
-			// .replace(/&/g, '&amp')
-			// .replace(/</g, '&lt')
-			// .replace(/>/g, '&gt')
-
 		const highlighted = json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+-]?\d+)?)/g, match => {
 			let colorClass = 'NUMBER'
 
@@ -179,20 +161,26 @@ const bgLineNos = (text, opts) => {
 	const max = maxLength(text)
 
 	lines.forEach((line, lineNumber) => {
+		let lineOutput = ''
+
+		if (opts.lineNumbers) {
+			const lineNum = chalkify(opts.colors.LINE_NUMBERS)(
+				padLine(
+					String(lineNumber + 1)
+						.padStart(String(lines.length + 1).length, ' '),
+					opts.lineNumberPad
+				)
+			)
+			lineOutput += lineNum
+		}
+
 		const plain = stripAnsi(line)
 		const padToEnd = String().padEnd(max - plain.length, ' ')
 		const runLengthLine = line + chalkify(opts.colors.TRAILING_SPACE)(padToEnd)
 		const paddedLine = padLine(runLengthLine, opts.codePad)
+		lineOutput += paddedLine
 
-		const lineNum = chalkify(opts.colors.LINE_NUMBERS)(
-			padLine(
-				String(lineNumber + 1)
-					.padStart(String(lines.length + 1).length, ' '),
-				opts.lineNumberPad
-			)
-		)
-
-		output += lineNum + paddedLine + '\n'
+		output += lineOutput + '\n'
 	})
 
 	return chalkify(opts.colors.BASE)(output)
@@ -201,7 +189,8 @@ const bgLineNos = (text, opts) => {
 const tabToSpaceIndent = (str, opts) => str.replace(/\t/g, String().padStart(opts.indent, ' '))
 
 const procOpts = (opts = {}) => {
-	const options = {
+	let options = {
+		lineNumbers: true,
 		lang: 'javascript',
 		lineNumberPad: 1,
 		codePad: 1,
@@ -209,12 +198,9 @@ const procOpts = (opts = {}) => {
 		colors: DARK_COLORS
 	}
 
-	Reflect.ownKeys(opts).forEach(option => {
-		const val = opts[option]
-		if (Reflect.has(options, option)) {
-			options[option] = val
-		}
-	})
+	if (opts) {
+		options = merge(options, opts)
+	}
 
 	return options
 }

@@ -84,7 +84,9 @@ server_port:            .hword 0x0b1a
 // console.log(chromalicious)
 
 // console.log(chromafi(code, {codePad: 1}))
+console.log()
 console.log(chromafi(jsObject))
+console.log()
 // console.log(chromafi(chromafi))
 
 
