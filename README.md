@@ -4,7 +4,7 @@
 
 ![Figure 00](figure-00.png)
 
-For years, JavaScripts across the web have committed monocrimes against humanity. Today our long struggle ends.
+For years, JavaScripts around the web have committed monocrimes against humanity too horrible to mention. Our struggle ends today.
 
 * JavaScript objects that are logged to the console... still look like JavaScript objects.
 * Chromafi highlights JavaScript functions.
