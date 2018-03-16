@@ -17,6 +17,7 @@ const DARK_COLORS = {
 	BUILT_IN: ['blue'],
 	LITERAL: ['magenta'],
 	ATTR: ['yellow'],
+	ATTR_STRING: ['cyan'],
 	TRAILING_SPACE: [],
 	REGEXP: ['magenta'],
 	LINE_NUMBERS: ['gray', 'dim']
@@ -65,7 +66,6 @@ const filter = (node, opts) => {
 
 	if (node.name === 'span' && node.type === 'tag') {
 		color = node.attribs.class.split('-')[1].toUpperCase()
-		console.log(color)
 	}
 
 	if (node.childNodes && node.childNodes.length > 0) {
@@ -122,10 +122,10 @@ const syntaxHlJson = (json, opts) => {
 	}, opts.indent)
 
 	try {
-		json = json
-			.replace(/&/g, '&amp')
-			.replace(/</g, '&lt')
-			.replace(/>/g, '&gt')
+		// json = json
+			// .replace(/&/g, '&amp')
+			// .replace(/</g, '&lt')
+			// .replace(/>/g, '&gt')
 
 		const highlighted = json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+-]?\d+)?)/g, match => {
 			let colorClass = 'NUMBER'
@@ -135,7 +135,7 @@ const syntaxHlJson = (json, opts) => {
 				// eslint-disable-next-line unicorn/prefer-starts-ends-with
 				if (/:$/.test(match)) {
 					if (match.includes('-')) {
-						colorClass = 'STRING'
+						colorClass = 'ATTR_STRING'
 						match = match.replace(/"/g, '\'')
 					} else {
 						colorClass = 'ATTR'
@@ -200,7 +200,7 @@ const bgLineNos = (text, opts) => {
 
 const tabToSpaceIndent = (str, opts) => str.replace(/\t/g, String().padStart(opts.indent, ' '))
 
-const procOpts = opts => {
+const procOpts = (opts = {}) => {
 	const options = {
 		lang: 'javascript',
 		lineNumberPad: 1,

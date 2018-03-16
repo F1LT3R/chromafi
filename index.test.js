@@ -1,10 +1,11 @@
+const chromafi = require('.')
+
 const jsObject = {
 	foo: 'bar',
 	baz: 1337,
 	qux: true,
 	zxc: null,
-	// eslint-disable-next-line object-shorthand
-	spqr: function (a, b) {
+	'foogle-bork': function (a, b) {
 		return b - a
 	}
 }
@@ -75,13 +76,25 @@ server_addr:            .long 0x0100007f ; localhost
 server_port:            .hword 0x0b1a
 `
 
-const chromalicious = chromafi(asm, {
-	codePad: 1,
-	lang: 'arm'
-})
+// const chromalicious = chromafi(asm, {
+// 	codePad: 1,
+// 	lang: 'arm'
+// })
 
-console.log(chromalicious)
+// console.log(chromalicious)
 
 // console.log(chromafi(code, {codePad: 1}))
-// console.log(chromafi(jsObject))
+console.log(chromafi(jsObject))
 // console.log(chromafi(chromafi))
+
+
+
+// chromafi({
+//     foo: 'bar',
+//     baz: 1337,
+//     qux: true,
+//     zxc: null,
+//     'foogle-bork': function (a, b) {
+//         return b - a
+//     }
+// })
