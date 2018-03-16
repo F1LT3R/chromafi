@@ -2,6 +2,9 @@
 
 > 💥 Syntax highlight to console: any lang - any fn, any - obj.
 
+![Figure 00](figure-00.png)
+
+
 [badges]
 
 For years, Javacripts across the web have committed monocrimes against humanity too horrible to mention. Today our long stuggle ends. with Chromafi, JavaScript objects logged to the console... still look like JavaScript objects. Oh... and you can highlight other languages too!
@@ -105,6 +108,8 @@ console.log(chromatastic)
 ![Figure 04](figure-04.png)
 
 ## Light Color Scheme
+
+Chromafi uses [`chalk`](https://github.com/chalk/chalk) to write colorcodes to the terminal. Each color class is an array of chalk colors. 
 
 ```javascript
 const chromafi = require('chromafi')
