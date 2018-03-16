@@ -2,13 +2,12 @@
 
 > 💥 Console syntax highlighting: any function, any object and 176 languages.
 
-![Figure 00](figure-00.png)
-
 [![Build Status](https://travis-ci.org/F1LT3R/chromafi.svg?branch=master)](https://travis-ci.org/F1LT3R/chromafi)
 [![Coverage Status](https://coveralls.io/repos/github/F1LT3R/chromafi/badge.svg?branch=master)](https://coveralls.io/github/F1LT3R/chromafi?branch=master)
 [![Npm Version](https://img.shields.io/npm/v/chromafi.svg)](https://www.npmjs.com/package/chromafi)
 [![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/sindresorhus/xo)
 
+![Figure 00](figure-00.png)
 
 For years, JavaScripts around the web have committed monocrimes against humanity too horrible to mention. Our struggle ends today.
 
