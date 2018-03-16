@@ -4,7 +4,8 @@
     "description": "💥 Syntax highlight to console: any function - any - object - any language.",
     "main": "index.js",
     "scripts": {
-        "test": "xo && ava"
+	    "test": "xo && nyc  --reporter=html --reporter=lcov ava",
+	    "coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls -v"
     },
     "repository": {
         "type": "git",
