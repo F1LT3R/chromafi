@@ -21,7 +21,6 @@ const create = (kind, parent) => {
 }
 `
 
-const chromatastic = chromafi(codeString)
+const cchromadactic = chromafi(codeString)
 
-// eslint-disable-next-line no-console
-console.log(chromatastic)
+console.log(chromadactic)

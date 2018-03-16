@@ -23,7 +23,6 @@ const chromafantastic = chromafi(obj, {
 		built_in: chalk.blue,
 		literal: chalk.blue,
 		attr: chalk.black,
-		// Just pass `chalk` to ignore colors
 		trailing_space: chalk,
 		regexp: chalk.blue,
 		line_numbers: chalk.bgBlue.white

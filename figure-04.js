@@ -13,6 +13,6 @@ const options = {
 	}
 }
 
-const chromatastic = chromafi(obj, options)
+const chromafanatic = chromafi(obj, options)
 
-console.log(chromatastic)
+console.log(chromafanatic)
