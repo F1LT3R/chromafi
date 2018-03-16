@@ -1,0 +1,28 @@
+{
+    "name": "chromafi",
+    "version": "1.0.0",
+    "description": "💥 Syntax highlight to console: any function - any - object - any language.",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "dependencies": {
+        "ava": "^0.25.0",
+        "chalk": "^2.3.2",
+        "cheerio": "^1.0.0-rc.2",
+        "highlight.js": "^9.12.0",
+        "nyc": "^11.6.0",
+        "strip-ansi": "^4.0.0",
+        "xo": "^0.20.3"
+    },
+    "xo": {
+        "esnext": true,
+        "semicolon": false,
+        "rules": {
+            "no-console": 1,
+            "space-before-function-paren": 0
+        }
+    },
+    "author": "F1LT3R",
+    "license": "MIT"
+}
