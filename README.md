@@ -1,10 +1,18 @@
-# Chromafi
+# 💥 Chromafi
 
-> 💥 Syntax highlight to console: any lang - any fn, any - obj.
+> Console syntax highlighting: any function, any object and 176 languages.
 
 ![Figure 00](figure-00.png)
 
-For years, Javacripts across the web have committed monocrimes against humanity too horrible to mention. Today our long stuggle ends. with Chromafi, JavaScript objects logged to the console... still look like JavaScript objects. Oh... and you can highlight other languages too!
+For years, Javacripts across the web have committed monocrimes against humanity too horrible to mention. Today our long stuggle ends.
+
+* JavaScript objects logged to the console... still look like JavaScript objects.
+* Chromafi highlights JavaScript functions.
+* Adjust indentation for tabbed code with Chromafi.
+* User defined color palettes.
+* Line numbers optional.
+* Padding adjustment for use with background colors or tight spaces.
+* Chromafi also highlights strings of code in 176 languages.
 
 ## Usage
 
@@ -38,9 +46,10 @@ const chromafi = require('chromafi')
 function add (a, b) {
     return a + b
 }
-const chromatastic = chromafi(add)
 
-console.log(chromatastic)
+const chromantic = chromafi(add)
+
+console.log(chromantic)
 ```
 
 ![Figure 02](figure-02.png)
@@ -71,9 +80,9 @@ const create = (kind, parent) => {
 }
 `
 
-const chromatastic = chromafi(codeString)
+const chromadactic = chromafi(codeString)
 
-console.log(chromatastic)
+console.log(chromadactic)
 ```
 
 ![Figure 03](figure-03.png)
@@ -96,9 +105,9 @@ const options = {
     }
 }
 
-const chromatastic = chromafi(obj, options)
+const chromafanatic = chromafi(obj, options)
 
-console.log(chromatastic)
+console.log(chromafanatic)
 
 ```
 
@@ -106,10 +115,13 @@ console.log(chromatastic)
 
 ## Light Color Scheme
 
-Chromafi uses [`chalk`](https://github.com/chalk/chalk) to write colorcodes to the terminal. Each color class is an array of chalk colors. 
+Chromafi uses [Chalk](https://github.com/chalk/chalk) to write ANSI color codes to the terminal.
 
 ```javascript
 const chromafi = require('chromafi')
+
+const chromafi = require('.')
+const chalk = require('chalk')
 
 const obj = {
     foo: 'bar',
@@ -121,34 +133,35 @@ const obj = {
     }
 }
 
-const chromatastic = chromafi(obj, {
+const chromafantastic = chromafi(obj, {
     colors: {
-        BASE: ['bgWhite', 'black', 'bold'],
-        KEYWORD: ['red'],
-        NUMBER: ['blue', 'dim'],
-        FUNCTION: ['black'],
-        TITLE: ['blue'],
-        PARAMS: ['black'],
-        STRING: ['black'],
-        BUILT_IN: ['magenta'],
-        LITERAL: ['blue'],
-        ATTR: ['black'],
-        TRAILING_SPACE: [],
-        REGEXP: ['blue'],
-        LINE_NUMBERS: ['bgBlue', 'white']
+        base: chalk.bgWhite.black.bold,
+        keyword: chalk.red,
+        number: chalk.blue.dim,
+        function: chalk.black,
+        title: chalk.blue,
+        params: chalk.black,
+        string: chalk.black,
+        built_in: chalk.blue,
+        literal: chalk.blue,
+        attr: chalk.black,
+        // Just pass `chalk` to ignore colors
+        trailing_space: chalk,
+        regexp: chalk.blue,
+        line_numbers: chalk.bgBlue.white
     }
 })
 
-console.log(chromatastic)
+console.log(chromafantastic)
 ```
 
 ![Figure 05](figure-05.png)
 
-## Logging Other Languages
+## Highlighting Other Languages
 
-Chromafi uses [`highlight.js`](https://highlightjs.org/) internally to add syntax highlighting to your code. This means that you can use any language that `highlight.js` can use.
+Chromafi uses [Highlight.js](https://highlightjs.org/) to syntax highlight to your code. This means Chromafi can highlight any language that `Highlight.js` can.
 
-Here is an example using Chromafi to highlight assembler syntax .
+Let's Chromafi some assembler syntax:
 
 ```javascript
 const chromafi = require('chromafi')
@@ -198,3 +211,8 @@ console.log(chromalicious)
 ```
 
 ![Figure 06](figure-06.png)
+
+## Supported Languages
+
+> 1c, abnf, accesslog, actionscript, ada, apache, applescript, arduino, armasm, asciidoc, aspectj, autohotkey, autoit, avrasm, awk, axapta, bash, basic, bnf, brainfuck, cal, capnproto, ceylon, clean, clojure-repl, clojure, cmake, coffeescript, coq, cos, cpp, crmsh, crystal, cs, csp, css, d, dart, delphi, diff, django, dns, dockerfile, dos, dsconfig, dts, dust, ebnf, elixir, elm, erb, erlang-repl, erlang, excel, fix, flix, fortran, fsharp, gams, gauss, gcode, gherkin, glsl, go, golo, gradle, groovy, haml, handlebars, haskell, haxe, hsp, htmlbars, http, hy, inform7, ini, irpf90, java, javascript, jboss-cli, json, julia-repl, julia, kotlin, lasso, ldif, leaf, less, lisp, livecodeserver, livescript, llvm, lsl, lua, makefile, markdown, mathematica, matlab, maxima, mel, mercury, mipsasm, mizar, mojolicious, monkey, moonscript, n1ql, nginx, nimrod, nix, nsis, objectivec, ocaml, openscad, oxygene, parser3, perl, pf, php, pony, powershell, processing, profile, prolog, protobuf, puppet, purebasic, python, q, qml, r, rib, roboconf, routeros, rsl, ruby, ruleslanguage, rust, scala, scheme, scilab, scss, shell, smali, smalltalk, sml, sqf, sql, stan, stata, step21, stylus, subunit, swift, taggerscript, tap, tcl, tex, thrift, tp, twig, typescript, vala, vbnet, vbscript-html, vbscript, verilog, vhdl, vim, x86asm, xl, xml, xquery, yaml, zephir
+

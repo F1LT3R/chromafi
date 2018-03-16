@@ -1,6 +1,6 @@
 {
     "name": "chromafi",
-    "version": "1.0.8",
+    "version": "1.0.9",
     "description": "💥 Syntax highlight to console: any function - any - object - any language.",
     "main": "index.js",
     "scripts": {
@@ -8,7 +8,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+ssh://git@github.com/f1lt3r/chromafi.git"
+        "url": "git@github.com:f1lt3r/chromafi.git"
     },
     "dependencies": {
         "ava": "^0.25.0",
@@ -26,7 +26,10 @@
         "rules": {
             "no-console": 1,
             "space-before-function-paren": 0
-        }
+        },
+        "ignores": [
+        	"figure*"
+        ]
     },
     "keywords": [
         "syntax",

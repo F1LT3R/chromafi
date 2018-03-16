@@ -1,6 +1,6 @@
 const chromafi = require('.')
 
-const obj = {foobar: 1337, 'baz-quz': function (a, b) { return 'Wombat!'}}
+const obj = {foobar: 1337, 'baz-qux': function (a, b) {return 'Wombat!'}}
 
 const options = {
 	lineNumberPad: 1,
@@ -8,7 +8,7 @@ const options = {
 	indent: 2,
 	lineNumbers: true,
 	colors: {
-		LINE_NUMBERS: ['reset', 'gray']
+		line_numbers: chalk.grey
 	}
 }
 

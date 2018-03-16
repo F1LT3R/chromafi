@@ -4,38 +4,28 @@ const chalk = require('chalk')
 const stripAnsi = require('strip-ansi')
 const merge = require('deepmerge')
 
-const DARK_COLORS = {
-	BASE: ['white'],
-	KEYWORD: ['red'],
-	COMMENT: ['gray', 'dim'],
-	SYMBOL: ['cyan'],
-	META: ['cyan'],
-	NUMBER: ['green'],
-	FUNCTION: ['white'],
-	TITLE: ['green'],
-	PARAMS: ['blue'],
-	STRING: ['yellow'],
-	BUILT_IN: ['blue'],
-	LITERAL: ['magenta'],
-	ATTR: ['yellow'],
-	ATTR_STRING: ['cyan'],
-	TRAILING_SPACE: [],
-	REGEXP: ['magenta'],
-	LINE_NUMBERS: ['gray', 'dim']
-}
-
-const chalkify = styleAry => {
-	if (!styleAry) {
-		return chalk.reset
-	}
-
-	let style = chalk
-
-	styleAry.forEach(prop => {
-		style = style[prop]
-	})
-
-	return style
+const darkPalette = {
+	base: chalk.white,
+	keyword: chalk.red,
+	comment: chalk.white.dim,
+	symbol: chalk.cyan,
+	meta: chalk.cyan,
+	number: chalk.green,
+	function: chalk.white,
+	title: chalk.green,
+	params: chalk.blue,
+	string: chalk.yellow,
+	// eslint-disable-next-line camelcase
+	built_in: chalk.blue,
+	literal: chalk.magenta,
+	attr: chalk.yellow,
+	// eslint-disable-next-line camelcase
+	attr_string: chalk.cyan,
+	// eslint-disable-next-line camelcase
+	trailing_space: chalk,
+	regexp: chalk.magenta,
+	// eslint-disable-next-line camelcase
+	line_numbers: chalk.grey
 }
 
 const filter = (node, opts) => {
@@ -49,14 +39,14 @@ const filter = (node, opts) => {
 	}
 
 	if (node.name === 'span' && node.type === 'tag') {
-		color = node.attribs.class.split('-')[1].toUpperCase()
+		color = node.attribs.class.split('-')[1].toLowerCase()
 	}
 
 	if (node.childNodes && node.childNodes.length > 0) {
 		childText = node.childNodes.map(childNode => filter(childNode, opts)).join('')
 
 		if (typeof color === 'string') {
-			return chalkify(opts.colors[color])(childText)
+			return opts.colors[color](childText)
 		}
 
 		return childText
@@ -110,21 +100,21 @@ const syntaxHlJson = (json, opts) => {
 
 	try {
 		const highlighted = json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+-]?\d+)?)/g, match => {
-			let colorClass = 'NUMBER'
+			let colorClass = 'number'
 
 			// eslint-disable-next-line unicorn/prefer-starts-ends-with
 			if (/^"/.test(match)) {
 				// eslint-disable-next-line unicorn/prefer-starts-ends-with
 				if (/:$/.test(match)) {
 					if (match.includes('-')) {
-						colorClass = 'ATTR_STRING'
+						colorClass = 'attr_string'
 						match = match.replace(/"/g, '\'')
 					} else {
-						colorClass = 'ATTR'
+						colorClass = 'attr'
 						match = match.replace(/"/g, '')
 					}
 				} else {
-					colorClass = 'STRING'
+					colorClass = 'string'
 
 					match = match.replace(/"/g, '\'')
 						.replace(/\\n/g, '\n')
@@ -134,18 +124,16 @@ const syntaxHlJson = (json, opts) => {
 						match.substr(match.length - 11, 10) === '[FUNCTION]') {
 						match = match.substr(11, match.length - 22)
 						match = syntaxHlStr('javascript', match, opts)
-						colorClass = 'FUNCTION'
+						colorClass = 'function'
 					}
 				}
 			} else if (/true|false/.test(match)) {
-				colorClass = 'LITERAL'
+				colorClass = 'literal'
 			} else if (/null/.test(match)) {
-				colorClass = 'LITERAL'
+				colorClass = 'literal'
 			}
 
-			const styleAry = opts.colors[colorClass]
-			const style = chalkify(styleAry)
-			return style(match)
+			return opts.colors[colorClass](match)
 		})
 
 		return highlighted
@@ -164,7 +152,7 @@ const bgLineNos = (text, opts) => {
 		let lineOutput = ''
 
 		if (opts.lineNumbers) {
-			const lineNum = chalkify(opts.colors.LINE_NUMBERS)(
+			const lineNum = opts.colors.line_numbers(
 				padLine(
 					String(lineNumber + 1)
 						.padStart(String(lines.length + 1).length, ' '),
@@ -176,14 +164,14 @@ const bgLineNos = (text, opts) => {
 
 		const plain = stripAnsi(line)
 		const padToEnd = String().padEnd(max - plain.length, ' ')
-		const runLengthLine = line + chalkify(opts.colors.TRAILING_SPACE)(padToEnd)
+		const runLengthLine = line + opts.colors.trailing_space(padToEnd)
 		const paddedLine = padLine(runLengthLine, opts.codePad)
 		lineOutput += paddedLine
 
 		output += lineOutput + '\n'
 	})
 
-	return chalkify(opts.colors.BASE)(output)
+	return opts.colors.base(output)
 }
 
 const tabToSpaceIndent = (str, opts) => str.replace(/\t/g, String().padStart(opts.indent, ' '))
@@ -195,7 +183,7 @@ const procOpts = (opts = {}) => {
 		lineNumberPad: 1,
 		codePad: 1,
 		indent: 4,
-		colors: DARK_COLORS
+		colors: darkPalette
 	}
 
 	if (opts) {

@@ -1,4 +1,5 @@
 const chromafi = require('.')
+const chalk = require('chalk')
 
 const obj = {
 	foo: 'bar',
@@ -10,22 +11,23 @@ const obj = {
 	}
 }
 
-const chromatastic = chromafi(obj, {
+const chromafantastic = chromafi(obj, {
 	colors: {
-		BASE: ['bgWhite', 'black', 'bold'],
-		KEYWORD: ['red'],
-		NUMBER: ['blue', 'dim'],
-		FUNCTION: ['black'],
-		TITLE: ['blue'],
-		PARAMS: ['black'],
-		STRING: ['black'],
-		BUILT_IN: ['magenta'],
-		LITERAL: ['blue'],
-		ATTR: ['black'],
-		TRAILING_SPACE: [],
-		REGEXP: ['blue'],
-		LINE_NUMBERS: ['bgBlue', 'white']
+		base: chalk.bgWhite.black.bold,
+		keyword: chalk.red,
+		number: chalk.blue.dim,
+		function: chalk.black,
+		title: chalk.blue,
+		params: chalk.black,
+		string: chalk.black,
+		built_in: chalk.blue,
+		literal: chalk.blue,
+		attr: chalk.black,
+		// Just pass `chalk` to ignore colors
+		trailing_space: chalk,
+		regexp: chalk.blue,
+		line_numbers: chalk.bgBlue.white
 	}
 })
 
-console.log(chromatastic)
+console.log(chromafantastic)
