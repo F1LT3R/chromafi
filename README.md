@@ -1,12 +1,12 @@
-# 💥 Chromafi
+# Chromafi
 
-> Console syntax highlighting: any function, any object and 176 languages.
+> 💥 Console syntax highlighting: any function, any object and 176 languages.
 
 ![Figure 00](figure-00.png)
 
 For years, Javacripts across the web have committed monocrimes against humanity too horrible to mention. Today our long stuggle ends.
 
-* JavaScript objects logged to the console... still look like JavaScript objects.
+* JavaScript objects that are logged to the console... still look like JavaScript objects.
 * Chromafi highlights JavaScript functions.
 * Adjust indentation for tabbed code with Chromafi.
 * User defined color palettes.
@@ -91,6 +91,7 @@ console.log(chromadactic)
 
 ```javascript
 const chromafi = require('chromafi')
+const chalk = require('chalk')
 
 const obj = {foobar: 1337}
 
@@ -100,8 +101,8 @@ const options = {
     indent: 2,
     lineNumbers: true,
     colors: {
-        BASE: ['bgBlack', 'white', 'bold'],
-        LINE_NUMBERS: ['bgCyan', 'black']
+        base: chalk.bgBlack.white.bold,
+        line_numbers: chalk.bgCyan.black
     }
 }
 
