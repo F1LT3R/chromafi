@@ -1,10 +1,14 @@
 {
     "name": "chromafi",
-    "version": "1.0.0",
+    "version": "1.0.4",
     "description": "💥 Syntax highlight to console: any function - any - object - any language.",
     "main": "index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+ssh://git@github.com/f1lt3r/chromafi.git"
     },
     "dependencies": {
         "ava": "^0.25.0",
@@ -24,6 +28,21 @@
             "space-before-function-paren": 0
         }
     },
+    "keywords": [
+        "syntax",
+        "highlight",
+        "color",
+        "console",
+        "terminal",
+        "language",
+        "highlight.js",
+        "chalk",
+        "object",
+        "string",
+        "function",
+        "line-numbers"
+    ],
     "author": "F1LT3R",
-    "license": "MIT"
+    "license": "MIT",
+    "homepage": "https://github.com/f1lt3r/chromafi#readme"
 }

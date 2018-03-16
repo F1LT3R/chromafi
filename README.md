@@ -1,6 +1,6 @@
 # Chromafi
 
-> 💥 Syntax highlight to console: any lang - any fn, any - obj.
+> Syntax highlight to console: any lang - any fn, any - obj.
 
 ![Figure 00](figure-00.png)
 
