@@ -1,11 +1,13 @@
-# Chromafi
+<img src="chromafi-logo.png" align="center">
 
-> 💥 Console syntax highlighting: any function, any object and 176 languages.
+# Chromafi
 
 [![Build Status](https://travis-ci.org/F1LT3R/chromafi.svg?branch=master)](https://travis-ci.org/F1LT3R/chromafi)
 [![Coverage Status](https://coveralls.io/repos/github/F1LT3R/chromafi/badge.svg?branch=master)](https://coveralls.io/github/F1LT3R/chromafi?branch=master)
 [![Npm Version](https://img.shields.io/npm/v/chromafi.svg)](https://www.npmjs.com/package/chromafi)
 [![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/sindresorhus/xo)
+
+> 💥 Console syntax highlighting: any function, any object and 176 languages.
 
 ![Figure 00](figure-00.png)
 
@@ -221,3 +223,13 @@ console.log(chromalicious)
 ## Supported Languages
 
 > 1c, abnf, accesslog, actionscript, ada, apache, applescript, arduino, armasm, asciidoc, aspectj, autohotkey, autoit, avrasm, awk, axapta, bash, basic, bnf, brainfuck, cal, capnproto, ceylon, clean, clojure-repl, clojure, cmake, coffeescript, coq, cos, cpp, crmsh, crystal, cs, csp, css, d, dart, delphi, diff, django, dns, dockerfile, dos, dsconfig, dts, dust, ebnf, elixir, elm, erb, erlang-repl, erlang, excel, fix, flix, fortran, fsharp, gams, gauss, gcode, gherkin, glsl, go, golo, gradle, groovy, haml, handlebars, haskell, haxe, hsp, htmlbars, http, hy, inform7, ini, irpf90, java, javascript, jboss-cli, json, julia-repl, julia, kotlin, lasso, ldif, leaf, less, lisp, livecodeserver, livescript, llvm, lsl, lua, makefile, markdown, mathematica, matlab, maxima, mel, mercury, mipsasm, mizar, mojolicious, monkey, moonscript, n1ql, nginx, nimrod, nix, nsis, objectivec, ocaml, openscad, oxygene, parser3, perl, pf, php, pony, powershell, processing, profile, prolog, protobuf, puppet, purebasic, python, q, qml, r, rib, roboconf, routeros, rsl, ruby, ruleslanguage, rust, scala, scheme, scilab, scss, shell, smali, smalltalk, sml, sqf, sql, stan, stata, step21, stylus, subunit, swift, taggerscript, tap, tcl, tex, thrift, tp, twig, typescript, vala, vbnet, vbscript-html, vbscript, verilog, vhdl, vim, x86asm, xl, xml, xquery, yaml, zephir
+
+
+## Credits
+
+Thank you to the following Noun Project artists for the vectors use in the lead graphic.
+
+- [Yoshi](https://thenounproject.com/aure7/)
+- [Tom Ingebretsen](https://thenounproject.com/tomplusplus/)
+- [Roussy Lucas](https://thenounproject.com/lroussy/)
+- [Wira](https://thenounproject.com/wirawizinda097/)
