@@ -227,7 +227,7 @@ console.log(chromalicious)
 
 ## Credits
 
-Thank you to the following Noun Project artists for the vectors use in the lead graphic.
+Thank you to the following Noun Project artists for the vectors used in the lead graphic.
 
 - [Yoshi](https://thenounproject.com/aure7/)
 - [Tom Ingebretsen](https://thenounproject.com/tomplusplus/)
