@@ -1,4 +1,4 @@
-<img src="chromafi-logo.png" align="center">
+![Chromafi Logo](chromafi-logo.png)
 
 # Chromafi
 
