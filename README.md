@@ -7,7 +7,7 @@
 [![Npm Version](https://img.shields.io/npm/v/chromafi.svg)](https://www.npmjs.com/package/chromafi)
 [![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/sindresorhus/xo)
 
-> 💥 Console syntax highlighting: any function, any object and 176 languages.
+> 🦅 Console syntax highlighting: any function, any object and 176 languages.
 
 ![Figure 00](figure-00.png)
 
