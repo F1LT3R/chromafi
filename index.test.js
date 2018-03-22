@@ -173,3 +173,20 @@ test('Change options', t => {
 	// eslint-disable-next-line unicorn/escape-case
 	t.is(result, '\u001b[40m\u001b[37m\u001b[1m\u001b[46m\u001b[30m1\u001b[37m\u001b[40m{             \u001b[22m\u001b[39m\u001b[49m\n\u001b[40m\u001b[37m\u001b[1m\u001b[46m\u001b[30m2\u001b[37m\u001b[40m  \u001b[33mfoobar:\u001b[37m \u001b[32m1337\u001b[37m\u001b[22m\u001b[39m\u001b[49m\n\u001b[40m\u001b[37m\u001b[1m\u001b[46m\u001b[30m3\u001b[37m\u001b[40m}             \u001b[22m\u001b[39m\u001b[49m\n\u001b[40m\u001b[37m\u001b[1m\u001b[22m\u001b[39m\u001b[49m')
 })
+
+test('Highlights HTML', t => {
+	const html = `
+	<body>
+		<div>
+			<span>Good</span>
+			<span>Bad</span>
+		</div>
+	<body>
+	`
+
+	const result = chromafi(html, {lang: 'html'})
+	t.is(typeof result, 'string')
+	// eslint-disable-next-line unicorn/escape-case
+	t.is(result, '\u001b[37m\u001b[90m 1 \u001b[37m                               \u001b[39m\n\u001b[37m\u001b[90m 2 \u001b[37m     \u001b[34m<\u001b[36mbody\u001b[34m>\u001b[37m                    \u001b[39m\n\u001b[37m\u001b[90m 3 \u001b[37m         \u001b[34m<\u001b[36mdiv\u001b[34m>\u001b[37m                 \u001b[39m\n\u001b[37m\u001b[90m 4 \u001b[37m             \u001b[34m<\u001b[36mspan\u001b[34m>\u001b[37mGood\u001b[34m</\u001b[36mspan\u001b[34m>\u001b[37m \u001b[39m\n\u001b[37m\u001b[90m 5 \u001b[37m             \u001b[34m<\u001b[36mspan\u001b[34m>\u001b[37mBad\u001b[34m</\u001b[36mspan\u001b[34m>\u001b[37m  \u001b[39m\n\u001b[37m\u001b[90m 6 \u001b[37m         \u001b[34m</\u001b[36mdiv\u001b[34m>\u001b[37m                \u001b[39m\n\u001b[37m\u001b[90m 7 \u001b[37m     \u001b[34m<\u001b[36mbody\u001b[34m>\u001b[37m                    \u001b[39m\n\u001b[37m\u001b[90m 8 \u001b[37m                               \u001b[39m\n\u001b[37m\u001b[39m')
+})
+

@@ -10,10 +10,12 @@ const darkPalette = {
 	comment: chalk.white.dim,
 	symbol: chalk.cyan,
 	meta: chalk.cyan,
+	name: chalk.cyan,
 	number: chalk.green,
 	function: chalk.white,
 	title: chalk.green,
 	params: chalk.blue,
+	tag: chalk.blue,
 	string: chalk.yellow,
 	// eslint-disable-next-line camelcase
 	built_in: chalk.blue,
