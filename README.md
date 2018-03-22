@@ -1,5 +1,3 @@
-![Chromafi Logo](chromafi-logo.png)
-
 # Chromafi
 
 [![Build Status](https://travis-ci.org/F1LT3R/chromafi.svg?branch=master)](https://travis-ci.org/F1LT3R/chromafi)
@@ -10,6 +8,9 @@
 > 🦅 Console syntax highlighting: any function, any object and 176 languages.
 
 ![Figure 00](figure-00.png)
+
+![Chromafi Logo](chromafi-logo.png)
+
 
 For years, JavaScripts around the web have committed monocrimes against humanity too horrible to mention. Our struggle ends today.
 

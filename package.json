@@ -1,6 +1,6 @@
 {
     "name": "chromafi",
-    "version": "1.6.0",
+    "version": "1.6.1",
     "description": "🦅  Syntax highlight to console: any function - any - object - any language.",
     "main": "index.js",
     "scripts": {
