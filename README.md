@@ -7,9 +7,9 @@
 
 > 🦅 Console syntax highlighting: any function, any object and 176 languages.
 
-![Figure 00](figure-00.png)
+<img height="260" src="chromafi-logo.png">
 
-<img align="right" height="260" src="chromafi-logo.png">
+![Figure 00](figure-00.png)
 
 For years, JavaScripts around the web have committed monocrimes against humanity too horrible to mention. Our struggle ends today.
 
