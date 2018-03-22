@@ -9,8 +9,7 @@
 
 ![Figure 00](figure-00.png)
 
-![Chromafi Logo](chromafi-logo.png)
-
+<img align="right" height="260" src="chromafi-logo.png">
 
 For years, JavaScripts around the web have committed monocrimes against humanity too horrible to mention. Our struggle ends today.
 
