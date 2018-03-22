@@ -1,6 +1,6 @@
 {
 	"name": "chromafi",
-	"version": "1.6.8",
+	"version": "1.6.9",
 	"description": "🦅  cli syntax highlighting: any function - any object - 176 languages",
 	"main": "index.js",
 	"scripts": {
@@ -15,13 +15,13 @@
 		"chalk": "^2.3.2",
 		"cheerio": "^1.0.0-rc.2",
 		"deepmerge": "^2.1.0",
-		"highlight.js": "^9.12.0"
+		"highlight.js": "^9.12.0",
+		"strip-ansi": "^4.0.0"
 	},
 	"devDependencies": {
 		"ava": "^0.25.0",
 		"coveralls": "^3.0.0",
 		"nyc": "^11.6.0",
-		"strip-ansi": "^4.0.0",
 		"xo": "^0.20.3"
 	},
 	"xo": {
