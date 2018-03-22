@@ -156,7 +156,7 @@ const bgLineNos = (text, opts) => {
 		if (opts.lineNumbers) {
 			const lineNum = opts.colors.line_numbers(
 				padLine(
-					String(lineNumber + 1)
+					String(lineNumber + opts.lineNumberStart)
 						.padStart(String(lines.length + 1).length, ' '),
 					opts.lineNumberPad
 				)
@@ -183,6 +183,7 @@ const procOpts = (opts = {}) => {
 		lineNumbers: true,
 		lang: 'javascript',
 		lineNumberPad: 1,
+		lineNumberStart: 1,
 		codePad: 1,
 		indent: 4,
 		colors: darkPalette
