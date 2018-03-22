@@ -1,51 +1,53 @@
 {
-    "name": "chromafi",
-    "version": "1.6.4",
-    "description": "🦅  Syntax highlight to console: any function - any - object - any language.",
-    "main": "index.js",
-    "scripts": {
-	    "test": "xo && nyc  --reporter=html --reporter=lcov ava",
-	    "coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls -v"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git@github.com:f1lt3r/chromafi.git"
-    },
-    "dependencies": {
-        "ava": "^0.25.0",
-        "chalk": "^2.3.2",
-        "cheerio": "^1.0.0-rc.2",
-        "coveralls": "^3.0.0",
-        "deepmerge": "^2.1.0",
-        "highlight.js": "^9.12.0",
-        "nyc": "^11.6.0",
-        "strip-ansi": "^4.0.0",
-        "xo": "^0.20.3"
-    },
-    "xo": {
-        "esnext": true,
-        "semicolon": false,
-        "rules": {
-            "no-console": 1,
-            "space-before-function-paren": 0
-        },
-        "ignores": [
-            "figure*"
-        ]
-    },
-    "keywords": [
-        "syntax",
-        "highlight",
-        "color",
-        "console",
-        "terminal",
-        "language",
-        "highlight.js",
-        "chalk",
-        "object",
-        "string",
-        "function",
-        "line-numbers",
+	"name": "chromafi",
+	"version": "1.6.5",
+	"description": "🦅  cli syntax highlighting: any function - any - object - any language.",
+	"main": "index.js",
+	"scripts": {
+		"test": "xo && nyc  --reporter=html --reporter=lcov ava",
+		"coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls -v"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git@github.com:f1lt3r/chromafi.git"
+	},
+	"dependencies": {
+		"chalk": "^2.3.2",
+		"cheerio": "^1.0.0-rc.2",
+		"deepmerge": "^2.1.0",
+		"highlight.js": "^9.12.0"
+	},
+	"devDependencies": {
+		"ava": "^0.25.0",
+		"coveralls": "^3.0.0",
+		"nyc": "^11.6.0",
+		"strip-ansi": "^4.0.0",
+		"xo": "^0.20.3"
+	},
+	"xo": {
+		"esnext": true,
+		"semicolon": false,
+		"rules": {
+			"no-console": 1,
+			"space-before-function-paren": 0
+		},
+		"ignores": [
+			"figure*"
+		]
+	},
+	"keywords": [
+		"syntax",
+		"highlight",
+		"color",
+		"console",
+		"terminal",
+		"language",
+		"highlight.js",
+		"chalk",
+		"object",
+		"string",
+		"function",
+		"line-numbers",
 		"1c",
 		"abnf",
 		"accesslog",
@@ -222,8 +224,8 @@
 		"xquery",
 		"yaml",
 		"zephir"
-    ],
-    "author": "F1LT3R",
-    "license": "MIT",
-    "homepage": "https://github.com/f1lt3r/chromafi#readme"
+	],
+	"author": "F1LT3R",
+	"license": "MIT",
+	"homepage": "https://github.com/f1lt3r/chromafi#readme"
 }
