@@ -7,7 +7,7 @@
 
 > 🦅 Console syntax highlighting: any function, any object and 176 languages.
 
-<img height="260" src="chromafi-logo.png">
+<img width="100%" src="chromafi-logo.png">
 
 ![Figure 00](figure-00.png)
 
