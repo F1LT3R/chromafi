@@ -1,7 +1,7 @@
 {
 	"name": "chromafi",
-	"version": "1.6.6",
-	"description": "🦅  cli syntax highlighting: any function - any - object - any language",
+	"version": "1.6.7",
+	"description": "🦅  cli syntax highlighting: any function - any - object - 176 languages",
 	"main": "index.js",
 	"scripts": {
 		"test": "xo && nyc  --reporter=html --reporter=lcov ava",
