@@ -211,3 +211,28 @@ test('Line number offset', t => {
 	t.is(result, '\u001b[37m\u001b[90m 123 \u001b[37m                               \u001b[39m\n\u001b[37m\u001b[90m 124 \u001b[37m     \u001b[34m<\u001b[36mbody\u001b[34m>\u001b[37m                    \u001b[39m\n\u001b[37m\u001b[90m 125 \u001b[37m         \u001b[34m<\u001b[36mdiv\u001b[34m>\u001b[37m                 \u001b[39m\n\u001b[37m\u001b[90m 126 \u001b[37m             \u001b[34m<\u001b[36mspan\u001b[34m>\u001b[37mGood\u001b[34m</\u001b[36mspan\u001b[34m>\u001b[37m \u001b[39m\n\u001b[37m\u001b[90m 127 \u001b[37m             \u001b[34m<\u001b[36mspan\u001b[34m>\u001b[37mBad\u001b[34m</\u001b[36mspan\u001b[34m>\u001b[37m  \u001b[39m\n\u001b[37m\u001b[90m 128 \u001b[37m         \u001b[34m</\u001b[36mdiv\u001b[34m>\u001b[37m                \u001b[39m\n\u001b[37m\u001b[90m 129 \u001b[37m     \u001b[34m<\u001b[36mbody\u001b[34m>\u001b[37m                    \u001b[39m\n\u001b[37m\u001b[90m 130 \u001b[37m                               \u001b[39m\n\u001b[37m\u001b[39m')
 })
 
+test.only('Highlight section', t => {
+	const html = `
+	<body>
+		<div>
+			<span>Good</span>
+			<span>Bad<span>
+		</div>
+	<body>
+	`
+
+	const result = chromafi(html, {
+		lang: 'html',
+		lineNumberStart: 123,
+		highlight: {
+			start: {line: 5, column: 14},
+			end: {line: 5, column: 38},
+			color: chalk.bgWhite.black.bold
+		}
+	})
+
+	t.is(typeof result, 'string')
+
+	// eslint-disable-next-line unicorn/escape-case
+	t.is(result, '\u001b[37m\u001b[90m 123 \u001b[37m                               \u001b[39m\n\u001b[37m\u001b[90m 124 \u001b[37m     \u001b[34m<\u001b[36mbody\u001b[34m>\u001b[37m                    \u001b[39m\n\u001b[37m\u001b[90m 125 \u001b[37m         \u001b[34m<\u001b[36mdiv\u001b[34m>\u001b[37m                 \u001b[39m\n\u001b[37m\u001b[90m 126 \u001b[37m             \u001b[34m<\u001b[36mspan\u001b[34m>\u001b[37mGood\u001b[34m</\u001b[36mspan\u001b[34m>\u001b[37m \u001b[39m\n\u001b[37m\u001b[90m 127 \u001b[37m             \u001b[34m<\u001b[36mspan\u001b[34m>\u001b[37mBad\u001b[34m</\u001b[36mspan\u001b[34m>\u001b[37m  \u001b[39m\n\u001b[37m\u001b[90m 128 \u001b[37m         \u001b[34m</\u001b[36mdiv\u001b[34m>\u001b[37m                \u001b[39m\n\u001b[37m\u001b[90m 129 \u001b[37m     \u001b[34m<\u001b[36mbody\u001b[34m>\u001b[37m                    \u001b[39m\n\u001b[37m\u001b[90m 130 \u001b[37m                               \u001b[39m\n\u001b[37m\u001b[39m')
+})

@@ -3,6 +3,8 @@ const cheerio = require('cheerio')
 const chalk = require('chalk')
 const stripAnsi = require('strip-ansi')
 const merge = require('deepmerge')
+const he = require('he')
+const ansiRegex = require('ansi-regex')
 
 const darkPalette = {
 	base: chalk.white,
@@ -184,6 +186,7 @@ const procOpts = (opts = {}) => {
 		lang: 'javascript',
 		lineNumberPad: 1,
 		lineNumberStart: 1,
+		highlight: false,
 		codePad: 1,
 		indent: 4,
 		colors: darkPalette
@@ -196,24 +199,101 @@ const procOpts = (opts = {}) => {
 	return options
 }
 
+const nthIndex = (str, pat, n) => {
+	const l = str.length
+	let i = -1
+	while(n-- && i++<l){
+		i = str.indexOf(pat, i)
+		if (i < 0) {
+			break
+		}
+	}
+	return i
+}
+
+// var s= "XYZ 123 ABC 456 ABC 789 ABC";
+
+// nthIndex(s,'ABC',3)
+
+const hlx = (str, pos, opts) => {
+	let output = ''
+
+	const start = pos.line.start
+	const end = pos.line.end
+	const inCol = opts.highlight.start.column
+	const outCol = opts.highlight.end.column
+
+	const colPos = 0
+
+	console.log(start, end)
+
+	for (let i = start; i < end; i += 1) {
+		const char = str[i]
+
+		// process.stdout.write(char)
+		const enc = he.encode(char)
+
+		if (opts && opts.keep && opts.keep.includes(char)) {
+			output += char
+		} else if (opts && opts.force && Reflect.has(opts.force, char)) {
+			output += opts.force[char]
+		} else if (enc.length > 1) {
+			output += '\\u' + enc
+				.substr(3, enc.indexOf(';') - 3)
+				.padStart(4, 0)
+				.toLowerCase()
+		} else {
+			output += char
+		}
+	}
+
+	// const marked = opts.highlight.color(textToMark)
+	return output
+}
+
+const highlight = (text, opts) => {
+	let output = ''
+
+	const startLine = opts.highlight.start.line
+	const endLine = opts.highlight.end.line
+	const startPosLine = nthIndex(text, '\n', startLine - 1)
+	const endPosLine = nthIndex(text, '\n', endLine)
+
+	const pos = {
+		line: {
+			start: startPosLine,
+			end: endPosLine
+		}
+	}
+	const marked = hlx(text, pos, opts)
+	// console.log(marked)
+
+	// const result = text.substr(0, startPos) + marked + text.substr(endPos)
+
+	return text
+}
+
 const chromafi = (monocrime, opts) => {
 	opts = procOpts(opts)
 
 	if (typeof monocrime === 'function') {
 		const fnStr = tabToSpaceIndent(String(monocrime), opts)
 		const colorized = syntaxHlStr(opts.lang, fnStr, opts)
-		return bgLineNos(colorized, opts)
+		const highlighted = opts.highlight ? highlight(colorized, opts) : colorized
+		return bgLineNos(highlighted, opts)
 	}
 
 	if (typeof monocrime === 'string') {
 		const script = tabToSpaceIndent(monocrime, opts)
 		const colorized = syntaxHlStr(opts.lang, script, opts)
-		return bgLineNos(colorized, opts)
+		const highlighted = opts.highlight ? highlight(colorized, opts) : colorized
+		return bgLineNos(highlighted, opts)
 	}
 
 	if (typeof monocrime === 'object') {
 		const colorized = syntaxHlJson(monocrime, opts)
-		return bgLineNos(colorized, opts)
+		const highlighted = opts.highlight ? highlight(colorized, opts) : colorized
+		return bgLineNos(highlighted, opts)
 	}
 }
 
