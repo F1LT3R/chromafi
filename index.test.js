@@ -3,10 +3,10 @@ import chalk from 'chalk'
 import chromafi from '.'
 
 // Encode: get escaped, testable string of correct result
-const encode = result => {
-	const json = JSON.stringify(result)
-	console.log(json.replace(/\'/g, '\\\''))
-}
+// const encode = result => {
+// 	const json = JSON.stringify(result)
+// 	console.log(json.replace(/\'/g, '\\\''))
+// }
 
 test('JavaScript function', t => {
 	function add (a, b) {
