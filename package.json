@@ -12,13 +12,20 @@
 		"url": "git@github.com:f1lt3r/chromafi.git"
 	},
 	"dependencies": {
+		"ansi-mark": "^1.0.0",
 		"ansi-regex": "^3.0.0",
+		"array-uniq": "^1.0.3",
+		"camelcase": "^4.1.0",
 		"chalk": "^2.3.2",
 		"cheerio": "^1.0.0-rc.2",
 		"deepmerge": "^2.1.0",
+		"detect-indent": "^5.0.0",
 		"he": "^1.1.1",
 		"highlight.js": "^9.12.0",
-		"strip-ansi": "^4.0.0"
+		"min-indent": "^1.0.0",
+		"strip-ansi": "^4.0.0",
+		"strip-indent": "^2.0.0",
+		"super-split": "^1.1.0"
 	},
 	"devDependencies": {
 		"ava": "^0.25.0",
@@ -31,11 +38,15 @@
 		"semicolon": false,
 		"rules": {
 			"no-console": 1,
-			"space-before-function-paren": 0
+			"space-before-function-paren": 0,
+			"unicorn/escape-case": 0
 		},
 		"ignores": [
 			"figure*"
 		]
+	},
+	"ava": {
+		"failfast": true
 	},
 	"keywords": [
 		"syntax",
