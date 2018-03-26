@@ -129,12 +129,13 @@ ansi-escapes@^3.0.0:
   resolved "https://registry.yarnpkg.com/ansi-escapes/-/ansi-escapes-3.0.0.tgz#ec3e8b4e9f8064fc02c3ac9b65f1c275bda8ef92"
 
 ansi-mark@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/ansi-mark/-/ansi-mark-1.0.0.tgz#dd461058da074a054977dfb2f540307452b19713"
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/ansi-mark/-/ansi-mark-1.0.4.tgz#1cd4ba8d57f15f109d6aaf6ec9ca9786c8a4ee6c"
   dependencies:
     ansi-regex "^3.0.0"
     array-uniq "^1.0.3"
     chalk "^2.3.2"
+    strip-ansi "^4.0.0"
     super-split "^1.1.0"
 
 ansi-regex@^2.0.0:
