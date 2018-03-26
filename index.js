@@ -3,6 +3,9 @@ const cheerio = require('cheerio')
 const chalk = require('chalk')
 const stripAnsi = require('strip-ansi')
 const merge = require('deepmerge')
+const ansiMark = require('ansi-mark')
+const stripIndent = require('strip-indent')
+const camelCase = require('camelcase')
 
 const darkPalette = {
 	base: chalk.white,
@@ -17,17 +20,13 @@ const darkPalette = {
 	params: chalk.blue,
 	tag: chalk.blue,
 	string: chalk.yellow,
-	// eslint-disable-next-line camelcase
-	built_in: chalk.blue,
+	builtIn: chalk.blue,
 	literal: chalk.magenta,
 	attr: chalk.yellow,
-	// eslint-disable-next-line camelcase
-	attr_string: chalk.cyan,
-	// eslint-disable-next-line camelcase
-	trailing_space: chalk,
+	attrString: chalk.cyan,
+	trailingSpace: chalk,
 	regexp: chalk.magenta,
-	// eslint-disable-next-line camelcase
-	line_numbers: chalk.grey
+	lineNumbers: chalk.grey
 }
 
 const filter = (node, opts) => {
@@ -41,7 +40,7 @@ const filter = (node, opts) => {
 	}
 
 	if (node.name === 'span' && node.type === 'tag') {
-		color = node.attribs.class.split('-')[1].toLowerCase()
+		color = camelCase(node.attribs.class.split('-')[1])
 	}
 
 	if (node.childNodes && node.childNodes.length > 0) {
@@ -57,25 +56,63 @@ const filter = (node, opts) => {
 	return ''
 }
 
-const maxLength = text => {
-	const lines = text.split('\n')
+const findLongestLine = (text, opts) => {
+	let tabPad = ''
+
+	if (opts.$indent.tabs) {
+		tabPad = String().padEnd(opts.consoleTabWidth, ' ')
+	}
+
+	const lines = stripAnsi(text)
+		.replace(/\t/g, tabPad)
+		.split('\n')
+
 	let max = 0
+
 	lines.forEach(line => {
-		line = stripAnsi(line)
 		if (line.length > max) {
 			max = line.length
 		}
 	})
+
 	return max
 }
 
-const padLine = (line, padding) => String()
-	.padStart(padding, ' ') + line + String().padEnd(padding, ' ')
+const padLine = (line, padding) => {
+	const padStr = String().padStart(padding, ' ')
+	return padStr + line + padStr
+}
 
-const syntaxHlStr = (lang, script, opts) => {
+const getIndentStr = opts => {
+	if (opts.$indent.tabs) {
+		return String().padStart(1, '\t')
+	}
+
+	// Opts.$indent.spaces === true
+	if (opts.tabsToSpaces === 0) {
+		return '\u0000'
+	}
+
+	return String().padEnd(opts.tabsToSpaces, ' ')
+}
+
+const syntaxHlStr = (lang, script, opts, indentStart) => {
 	let output = ''
 
-	script = script.replace('\t', '    ')
+	const indentStr = getIndentStr(opts)
+
+	if (opts.$indent.tabs) {
+		script = script.replace(/\t/g, indentStr)
+	}
+
+	if (opts.$indent.spaces) {
+		script = script.replace(/\t/g, indentStr)
+	}
+
+	if (indentStart) {
+		script = indentStr + script
+	}
+
 	const code = hljs.highlight(lang, script).value
 	const lines = code.split('\n')
 
@@ -93,82 +130,124 @@ const syntaxHlStr = (lang, script, opts) => {
 }
 
 const syntaxHlJson = (json, opts) => {
-	json = JSON.stringify(json, (key, val) => {
-		if (val instanceof Function) {
-			return `[FUNCTION]${String(val)}[FUNCTION]`
-		}
-		return val
-	}, opts.indent)
+	const indentStr = getIndentStr(opts)
 
 	try {
-		const highlighted = json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+-]?\d+)?)/g, match => {
-			let colorClass = 'number'
-
-			// eslint-disable-next-line unicorn/prefer-starts-ends-with
-			if (/^"/.test(match)) {
-				// eslint-disable-next-line unicorn/prefer-starts-ends-with
-				if (/:$/.test(match)) {
-					if (match.includes('-')) {
-						colorClass = 'attr_string'
-						match = match.replace(/"/g, '\'')
-					} else {
-						colorClass = 'attr'
-						match = match.replace(/"/g, '')
-					}
-				} else {
-					colorClass = 'string'
-
-					match = match.replace(/"/g, '\'')
-						.replace(/\\n/g, '\n')
-						.replace(/\\t/g, String().padStart(opts.indent, ' '))
-
-					if (match.substr(1, 10) === '[FUNCTION]' &&
-						match.substr(match.length - 11, 10) === '[FUNCTION]') {
-						match = match.substr(11, match.length - 22)
-						match = syntaxHlStr('javascript', match, opts)
-						colorClass = 'function'
-					}
-				}
-			} else if (/true|false/.test(match)) {
-				colorClass = 'literal'
-			} else if (/null/.test(match)) {
-				colorClass = 'literal'
+		json = JSON.stringify(json, (key, val) => {
+			if (val instanceof Function) {
+				return `[FUNCTION]${String(val)}[FUNCTION]`
 			}
-
-			return opts.colors[colorClass](match)
-		})
-
-		return highlighted
+			return val
+		}, indentStr)
 	} catch (err) {
-		throw (err)
+		err.message = '🦅  Chromafi: ' + err.message
+		throw new Error(err)
 	}
+
+	const highlighted = json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+-]?\d+)?)/g, match => {
+		let colorClass = 'number'
+
+		// eslint-disable-next-line unicorn/prefer-starts-ends-with
+		if (/^"/.test(match)) {
+			// eslint-disable-next-line unicorn/prefer-starts-ends-with
+			if (/:$/.test(match)) {
+				if (match.includes('-')) {
+					colorClass = 'attrString'
+					match = match.replace(/"/g, '\'')
+				} else {
+					colorClass = 'attr'
+					match = match.replace(/"/g, '')
+				}
+			} else {
+				colorClass = 'string'
+
+				match = match.replace(/"/g, '\'')
+					.replace(/\\n/g, '\n')
+					.replace(/\\t/g, indentStr)
+
+				if (match.substr(1, 10) === '[FUNCTION]' &&
+					match.substr(match.length - 11, 10) === '[FUNCTION]') {
+					match = match.substr(11, match.length - 22)
+					const indentStart = true
+					match = syntaxHlStr('javascript', match, opts, indentStart)
+					match = stripIndent(match)
+					// Remove leading indent to line up member-name w/ fn
+					match = match.replace(/^\s*/, '')
+					colorClass = 'function'
+				}
+			}
+		} else if (/true|false/.test(match)) {
+			colorClass = 'literal'
+		} else if (/null/.test(match)) {
+			colorClass = 'literal'
+		}
+
+		return opts.colors[colorClass](match)
+	})
+
+	return highlighted
 }
 
-const bgLineNos = (text, opts) => {
+const lineNumberPad = (number, opts) => {
+	if (!opts.lineNumbers) {
+		return ''
+	}
+
+	let output = ''
+
+	const offsetLineN = number + (opts.lineNumberStart - 1)
+
+	if (opts.$indent.spaces) {
+		const padStr = String().padStart(opts.lineNumberPad, ' ')
+		const prePad = opts.lineNumberPad + opts.$maxDigitWidth
+		output = String(offsetLineN).padStart(prePad) + padStr
+	}
+
+	// Indent using spaces - up to the tabwidth required to contain number str
+	if (opts.$indent.tabs) {
+		output = String(offsetLineN).padStart(opts.$maxTabSpace, ' ')
+	}
+
+	return opts.colors.lineNumbers(output)
+}
+
+const cropPadAndNumber = (text, opts) => {
 	let output = ''
 
 	const lines = text.split('\n')
-	const max = maxLength(text)
+	const maxDigitWidth = String(lines.length + (opts.lineNumberStart - 1)).length
+	// Tabs needed to contain digits (so we dont break code tab indentation)
+	const tabsNeeded = Math.ceil(maxDigitWidth / opts.consoleTabWidth)
+	const maxTabSpace = tabsNeeded * opts.consoleTabWidth
+	const longestLineLen = findLongestLine(text, opts)
 
-	lines.forEach((line, lineNumber) => {
-		let lineOutput = ''
+	opts.$maxTabSpace = maxTabSpace
+	opts.$maxDigitWidth = maxDigitWidth
 
-		if (opts.lineNumbers) {
-			const lineNum = opts.colors.line_numbers(
-				padLine(
-					String(lineNumber + opts.lineNumberStart)
-						.padStart(String(lines.length + 1).length, ' '),
-					opts.lineNumberPad
-				)
-			)
-			lineOutput += lineNum
+	lines.forEach((line, i) => {
+		const lineNumber = i + 1
+		if (lineNumber < opts.firstLine || lineNumber > opts.lastLine) {
+			return
 		}
 
-		const plain = stripAnsi(line)
-		const padToEnd = String().padEnd(max - plain.length, ' ')
-		const runLengthLine = line + opts.colors.trailing_space(padToEnd)
-		const paddedLine = padLine(runLengthLine, opts.codePad)
-		lineOutput += paddedLine
+		const lineNo = lineNumberPad(lineNumber, opts)
+
+		const tabCount = (line.match(/\t/g) || []).length
+		const tabAdjust = (tabCount * opts.consoleTabWidth)
+
+		const plain = stripAnsi(line).replace(/\t/g, '')
+		const linePad = String().padEnd((longestLineLen - plain.length) - tabAdjust, ' ')
+		const runLengthLine = line + opts.colors.trailingSpace(linePad)
+
+		let lineOutput
+
+		if (opts.tabsToSpaces === false) {
+			lineOutput = lineNo + runLengthLine
+		}
+
+		if (typeof opts.tabsToSpaces === 'number') {
+			lineOutput = lineNo + padLine(runLengthLine, opts.codePad)
+		}
 
 		output += lineOutput + '\n'
 	})
@@ -176,45 +255,77 @@ const bgLineNos = (text, opts) => {
 	return opts.colors.base(output)
 }
 
-const tabToSpaceIndent = (str, opts) => str.replace(/\t/g, String().padStart(opts.indent, ' '))
+const decorate = (ansiStr, opts) => {
+	if (opts.highlight) {
+		ansiStr = ansiMark(ansiStr, opts.highlight)
+	}
+	ansiStr = cropPadAndNumber(ansiStr, opts)
+	return ansiStr
+}
+
+const nameifyArrowFn = (fn, opts) => {
+	if (Reflect.has(fn, 'prototype') &&
+		Reflect.has(fn.prototype, 'constructor')) {
+		return ''
+	}
+
+	return `${opts.arrowKeyword} ${fn.name} = `
+}
 
 const procOpts = (opts = {}) => {
 	let options = {
 		lineNumbers: true,
 		lang: 'javascript',
-		lineNumberPad: 1,
+		lineNumberPad: 0,
 		lineNumberStart: 1,
+		start: 1,
+		end: Infinity,
+		highlight: false,
+		stripIndent: true,
 		codePad: 1,
-		indent: 4,
-		colors: darkPalette
+		colors: darkPalette,
+		tabsToSpaces: 4,
+		consoleTabWidth: 8,
+		arrowKeyword: 'const'
 	}
 
-	if (opts) {
-		options = merge(options, opts)
+	options = merge(options, opts)
+
+	options.$indent = {
+		spaces: typeof options.tabsToSpaces === 'number',
+		tabs: typeof options.tabsToSpaces === 'boolean' &&
+			options.tabsToSpaces === false,
+		size: typeof options.tabsToSpaces === 'number' ? options.tabsToSpaces : 1
 	}
 
 	return options
 }
 
-const chromafi = (monocrime, opts) => {
+const chromafi = (value, opts) => {
 	opts = procOpts(opts)
 
-	if (typeof monocrime === 'function') {
-		const fnStr = tabToSpaceIndent(String(monocrime), opts)
-		const colorized = syntaxHlStr(opts.lang, fnStr, opts)
-		return bgLineNos(colorized, opts)
+	if (typeof value === 'function') {
+		value = nameifyArrowFn(value, opts) + String(value)
+		const indentStart = true
+		value = syntaxHlStr('javascript', value, opts, indentStart)
+		value = stripIndent(value)
+		value = decorate(value, opts)
+		return value
 	}
 
-	if (typeof monocrime === 'string') {
-		const script = tabToSpaceIndent(monocrime, opts)
-		const colorized = syntaxHlStr(opts.lang, script, opts)
-		return bgLineNos(colorized, opts)
+	if (typeof value === 'string') {
+		value = syntaxHlStr(opts.lang, value, opts)
+		value = decorate(value, opts)
+		return value
 	}
 
-	if (typeof monocrime === 'object') {
-		const colorized = syntaxHlJson(monocrime, opts)
-		return bgLineNos(colorized, opts)
+	if (typeof value === 'object') {
+		value = syntaxHlJson(value, opts)
+		value = decorate(value, opts)
+		return value
 	}
+
+	throw new Error('🦅  Chromafi: You must pass a function, string or object.')
 }
 
 module.exports = chromafi
