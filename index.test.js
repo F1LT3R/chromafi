@@ -379,3 +379,37 @@ test('Single line highlight, replacing color', t => {
 	})
 	t.is(result, '\u001b[37m\u001b[33m<\u001b[36mdiv\u001b[33m>\u001b[37m\u001b[41m\u001b[37m\u001b[1mHighlight me!\u001b[22m\u001b[37m\u001b[49m\u001b[33m</\u001b[36mdiv\u001b[33m>\u001b[37m\u001b[39m\n\u001b[37m\u001b[39m')
 })
+
+test('Circular JSON throws', t => {
+	const a = {}
+	const b = {}
+	a.foo = b
+	b.foo = a
+
+	const error = t.throws(() => {
+		chromafi(a)
+	})
+
+	t.is(error.message, 'TypeError: 🦅  Chromafi: Converting circular structure to JSON')
+})
+
+test('Render a sub-portion of the lines', t => {
+	const html = '<body>\n\t<div>\n\t\t<span>Good</span>\n\t\t<span>Bad</span>\n\t</div>\n<body>'
+	const result = chromafi(html, {
+		lang: 'html',
+		firstLine: 3,
+		lastLine: 4
+	})
+	t.is(result, '\u001b[37m\u001b[90m3\u001b[37m         \u001b[34m<\u001b[36mspan\u001b[34m>\u001b[37mGood\u001b[34m</\u001b[36mspan\u001b[34m>\u001b[37m \u001b[39m\n\u001b[37m\u001b[90m4\u001b[37m         \u001b[34m<\u001b[36mspan\u001b[34m>\u001b[37mBad\u001b[34m</\u001b[36mspan\u001b[34m>\u001b[37m  \u001b[39m\n\u001b[37m\u001b[39m')
+})
+
+test('Should throw if type !<fn|string|obj>', t => {
+	const iBool = false
+
+	const error = t.throws(() => {
+		chromafi(iBool)
+	})
+
+	t.is(error.message, '🦅  Chromafi: You must pass a function, string or object.')
+})
+

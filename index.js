@@ -88,13 +88,12 @@ const getIndentStr = opts => {
 		return String().padStart(1, '\t')
 	}
 
-	if (opts.$indent.spaces) {
-		if (opts.tabsToSpaces === 0) {
-			return '\u0000'
-		}
-
-		return String().padEnd(opts.tabsToSpaces, ' ')
+	// Opts.$indent.spaces === true
+	if (opts.tabsToSpaces === 0) {
+		return '\u0000'
 	}
+
+	return String().padEnd(opts.tabsToSpaces, ' ')
 }
 
 const syntaxHlStr = (lang, script, opts, indentStart) => {
@@ -133,60 +132,60 @@ const syntaxHlStr = (lang, script, opts, indentStart) => {
 const syntaxHlJson = (json, opts) => {
 	const indentStr = getIndentStr(opts)
 
-	json = JSON.stringify(json, (key, val) => {
-		if (val instanceof Function) {
-			return `[FUNCTION]${String(val)}[FUNCTION]`
+	try {
+		json = JSON.stringify(json, (key, val) => {
+			if (val instanceof Function) {
+				return `[FUNCTION]${String(val)}[FUNCTION]`
+			}
+			return val
+		}, indentStr)
+	} catch (err) {
+		err.message = '🦅  Chromafi: ' + err.message
+		throw new Error(err)
+	}
+
+	const highlighted = json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+-]?\d+)?)/g, match => {
+		let colorClass = 'number'
+
+		// eslint-disable-next-line unicorn/prefer-starts-ends-with
+		if (/^"/.test(match)) {
+			// eslint-disable-next-line unicorn/prefer-starts-ends-with
+			if (/:$/.test(match)) {
+				if (match.includes('-')) {
+					colorClass = 'attrString'
+					match = match.replace(/"/g, '\'')
+				} else {
+					colorClass = 'attr'
+					match = match.replace(/"/g, '')
+				}
+			} else {
+				colorClass = 'string'
+
+				match = match.replace(/"/g, '\'')
+					.replace(/\\n/g, '\n')
+					.replace(/\\t/g, indentStr)
+
+				if (match.substr(1, 10) === '[FUNCTION]' &&
+					match.substr(match.length - 11, 10) === '[FUNCTION]') {
+					match = match.substr(11, match.length - 22)
+					const indentStart = true
+					match = syntaxHlStr('javascript', match, opts, indentStart)
+					match = stripIndent(match)
+					// Remove leading indent to line up member-name w/ fn
+					match = match.replace(/^\s*/, '')
+					colorClass = 'function'
+				}
+			}
+		} else if (/true|false/.test(match)) {
+			colorClass = 'literal'
+		} else if (/null/.test(match)) {
+			colorClass = 'literal'
 		}
 
-		return val
-	}, indentStr)
+		return opts.colors[colorClass](match)
+	})
 
-	try {
-		const highlighted = json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+-]?\d+)?)/g, match => {
-			let colorClass = 'number'
-
-			// eslint-disable-next-line unicorn/prefer-starts-ends-with
-			if (/^"/.test(match)) {
-				// eslint-disable-next-line unicorn/prefer-starts-ends-with
-				if (/:$/.test(match)) {
-					if (match.includes('-')) {
-						colorClass = 'attrString'
-						match = match.replace(/"/g, '\'')
-					} else {
-						colorClass = 'attr'
-						match = match.replace(/"/g, '')
-					}
-				} else {
-					colorClass = 'string'
-
-					match = match.replace(/"/g, '\'')
-						.replace(/\\n/g, '\n')
-						.replace(/\\t/g, indentStr)
-
-					if (match.substr(1, 10) === '[FUNCTION]' &&
-						match.substr(match.length - 11, 10) === '[FUNCTION]') {
-						match = match.substr(11, match.length - 22)
-						const indentStart = true
-						match = syntaxHlStr('javascript', match, opts, indentStart)
-						match = stripIndent(match)
-						// Remove leading indent to line up member-name w/ fn
-						match = match.replace(/^\s*/, '')
-						colorClass = 'function'
-					}
-				}
-			} else if (/true|false/.test(match)) {
-				colorClass = 'literal'
-			} else if (/null/.test(match)) {
-				colorClass = 'literal'
-			}
-
-			return opts.colors[colorClass](match)
-		})
-
-		return highlighted
-	} catch (err) {
-		throw (err)
-	}
+	return highlighted
 }
 
 const lineNumberPad = (number, opts) => {
@@ -227,7 +226,7 @@ const cropPadAndNumber = (text, opts) => {
 
 	lines.forEach((line, i) => {
 		const lineNumber = i + 1
-		if (lineNumber < opts.start || lineNumber > opts.end) {
+		if (lineNumber < opts.firstLine || lineNumber > opts.lastLine) {
 			return
 		}
 
@@ -290,9 +289,7 @@ const procOpts = (opts = {}) => {
 		arrowKeyword: 'const'
 	}
 
-	if (opts) {
-		options = merge(options, opts)
-	}
+	options = merge(options, opts)
 
 	options.$indent = {
 		spaces: typeof options.tabsToSpaces === 'number',
@@ -327,6 +324,8 @@ const chromafi = (value, opts) => {
 		value = decorate(value, opts)
 		return value
 	}
+
+	throw new Error('🦅  Chromafi: You must pass a function, string or object.')
 }
 
 module.exports = chromafi
