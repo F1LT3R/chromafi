@@ -1,4 +1,4 @@
-const chromafi = require('.')
+const chromafi = require('../.')
 
 function add (a, b) {
 	return a + b

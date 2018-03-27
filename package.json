@@ -42,7 +42,7 @@
 			"unicorn/escape-case": 0
 		},
 		"ignores": [
-			"figure*"
+			"examples/**/*"
 		]
 	},
 	"ava": {

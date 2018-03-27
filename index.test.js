@@ -41,12 +41,11 @@ test('JavaScript object, preserve tabs, w/o lineNumbers', t => {
 			return b - a
 		}
 	}
-
 	const result = chromafi(obj, {
 		tabsToSpaces: false,
 		lineNumbers: false
 	})
-	t.is(result, '\u001b[37m{                                       \u001b[39m\n\u001b[37m\t\u001b[33mfoo:\u001b[37m \u001b[33m\'bar\'\u001b[37m,                     \u001b[39m\n\u001b[37m\t\u001b[33mbaz:\u001b[37m \u001b[32m1337\u001b[37m,                      \u001b[39m\n\u001b[37m\t\u001b[33mqux:\u001b[37m \u001b[35mtrue\u001b[37m,                      \u001b[39m\n\u001b[37m\t\u001b[33mzxc:\u001b[37m \u001b[35mnull\u001b[37m,                      \u001b[39m\n\u001b[37m\t\u001b[36m\'foogle-bork\':\u001b[37m \u001b[37m\u001b[37m\u001b[31mfunction\u001b[37m (\u001b[34ma, b\u001b[37m) \u001b[37m{\u001b[37m\u001b[39m\n\u001b[37m\u001b[37m\t\t\u001b[31mreturn\u001b[37m b - a;\u001b[37m           \u001b[39m\n\u001b[37m\u001b[37m\t}\u001b[37m                               \u001b[39m\n\u001b[37m}                                       \u001b[39m\n\u001b[37m\u001b[39m')
+	t.is(result, '\u001b[37m{                                       \u001b[39m\n\u001b[37m\t\u001b[33mfoo:\u001b[37m \u001b[33m\'bar\'\u001b[37m,                     \u001b[39m\n\u001b[37m\t\u001b[33mbaz:\u001b[37m \u001b[32m1337\u001b[37m,                      \u001b[39m\n\u001b[37m\t\u001b[33mqux:\u001b[37m \u001b[35mtrue\u001b[37m,                      \u001b[39m\n\u001b[37m\t\u001b[33mzxc:\u001b[37m \u001b[35mnull\u001b[37m,                      \u001b[39m\n\u001b[37m\t\u001b[36m\'foogle-bork\':\u001b[37m \u001b[37m\u001b[37m\u001b[31mfunction\u001b[37m (\u001b[34ma, b\u001b[37m) \u001b[37m{\u001b[39m\n\u001b[37m\t\t\u001b[31mreturn\u001b[37m b - a;           \u001b[39m\n\u001b[37m\t}\u001b[37m                               \u001b[39m\n\u001b[37m}                                       \u001b[39m\n\u001b[37m\u001b[39m')
 })
 
 test('JavaScript object w/ deep functions', t => {
@@ -71,7 +70,7 @@ test('JavaScript object w/ deep functions', t => {
 		tabsToSpaces: false,
 		lineNumbers: false
 	})
-	t.is(result, '\u001b[37m{                                                            \u001b[39m\n\u001b[37m\t\u001b[33mfoo:\u001b[37m {                                               \u001b[39m\n\u001b[37m\t\t\u001b[33mbar:\u001b[37m {                                       \u001b[39m\n\u001b[37m\t\t\t\u001b[33mbaz:\u001b[37m {                               \u001b[39m\n\u001b[37m\t\t\t\t\u001b[33mqux:\u001b[37m {                       \u001b[39m\n\u001b[37m\t\t\t\t\t\u001b[36m\'z-x-c\':\u001b[37m \u001b[37m(x, y) => {\u001b[37m \u001b[39m\n\u001b[37m\u001b[37m\t\t\t\t\t\t\u001b[31mreturn\u001b[37m y * x;\u001b[37m\u001b[39m\n\u001b[37m\u001b[37m\t\t\t\t\t}\u001b[37m                    \u001b[39m\n\u001b[37m\t\t\t\t}                            \u001b[39m\n\u001b[37m\t\t\t}                                    \u001b[39m\n\u001b[37m\t\t}                                            \u001b[39m\n\u001b[37m\t},                                                   \u001b[39m\n\u001b[37m\t\u001b[36m\'foogle-bork\':\u001b[37m \u001b[37m\u001b[37m\u001b[31mfunction\u001b[37m (\u001b[34ma, b\u001b[37m) \u001b[37m{\u001b[37m                     \u001b[39m\n\u001b[37m\u001b[37m\t\t\u001b[31mreturn\u001b[37m b - a;\u001b[37m                                \u001b[39m\n\u001b[37m\u001b[37m\t}\u001b[37m                                                    \u001b[39m\n\u001b[37m}                                                            \u001b[39m\n\u001b[37m\u001b[39m')
+	t.is(result, '\u001b[37m{                                                            \u001b[39m\n\u001b[37m\t\u001b[33mfoo:\u001b[37m {                                               \u001b[39m\n\u001b[37m\t\t\u001b[33mbar:\u001b[37m {                                       \u001b[39m\n\u001b[37m\t\t\t\u001b[33mbaz:\u001b[37m {                               \u001b[39m\n\u001b[37m\t\t\t\t\u001b[33mqux:\u001b[37m {                       \u001b[39m\n\u001b[37m\t\t\t\t\t\u001b[36m\'z-x-c\':\u001b[37m \u001b[37m(x, y) => { \u001b[39m\n\u001b[37m\t\t\t\t\t\t\u001b[31mreturn\u001b[37m y * x;\u001b[39m\n\u001b[37m\t\t\t\t\t}\u001b[37m                    \u001b[39m\n\u001b[37m\t\t\t\t}                            \u001b[39m\n\u001b[37m\t\t\t}                                    \u001b[39m\n\u001b[37m\t\t}                                            \u001b[39m\n\u001b[37m\t},                                                   \u001b[39m\n\u001b[37m\t\u001b[36m\'foogle-bork\':\u001b[37m \u001b[37m\u001b[37m\u001b[31mfunction\u001b[37m (\u001b[34ma, b\u001b[37m) \u001b[37m{                     \u001b[39m\n\u001b[37m\t\t\u001b[31mreturn\u001b[37m b - a;                                \u001b[39m\n\u001b[37m\t}\u001b[37m                                                    \u001b[39m\n\u001b[37m}                                                            \u001b[39m\n\u001b[37m\u001b[39m')
 })
 
 test('JavaScript code string', t => {
@@ -181,7 +180,7 @@ test('Light background, tabsToSpaces', t => {
 		}
 	}
 	const result = chromafi(obj, options)
-	t.is(result, '\u001b[47m\u001b[30m\u001b[1m\u001b[44m\u001b[37m 1 \u001b[30m\u001b[47m {                                    \u001b[22m\u001b[39m\u001b[49m\n\u001b[47m\u001b[30m\u001b[1m\u001b[44m\u001b[37m 2 \u001b[30m\u001b[47m     \u001b[30mfoo:\u001b[30m \u001b[30m\'bar\'\u001b[30m,                      \u001b[22m\u001b[39m\u001b[49m\n\u001b[47m\u001b[30m\u001b[1m\u001b[44m\u001b[37m 3 \u001b[30m\u001b[47m     \u001b[30mbaz:\u001b[30m \u001b[34m\u001b[2m1337\u001b[1m\u001b[30m,                       \u001b[22m\u001b[39m\u001b[49m\n\u001b[47m\u001b[30m\u001b[1m\u001b[44m\u001b[37m 4 \u001b[30m\u001b[47m     \u001b[30mqux:\u001b[30m \u001b[34mtrue\u001b[30m,                       \u001b[22m\u001b[39m\u001b[49m\n\u001b[47m\u001b[30m\u001b[1m\u001b[44m\u001b[37m 5 \u001b[30m\u001b[47m     \u001b[30mzxc:\u001b[30m \u001b[34mnull\u001b[30m,                       \u001b[22m\u001b[39m\u001b[49m\n\u001b[47m\u001b[30m\u001b[1m\u001b[44m\u001b[37m 6 \u001b[30m\u001b[47m     \u001b[36m\'foogle-bork\':\u001b[30m \u001b[30m\u001b[30m\u001b[31mfunction\u001b[30m (\u001b[30ma, b\u001b[30m) \u001b[30m{\u001b[30m \u001b[22m\u001b[39m\u001b[49m\n\u001b[47m\u001b[30m\u001b[1m\u001b[44m\u001b[37m 7 \u001b[30m\u001b[47m \u001b[30m        \u001b[31mreturn\u001b[30m b - a;\u001b[30m                \u001b[22m\u001b[39m\u001b[49m\n\u001b[47m\u001b[30m\u001b[1m\u001b[44m\u001b[37m 8 \u001b[30m\u001b[47m \u001b[30m    }\u001b[30m                                \u001b[22m\u001b[39m\u001b[49m\n\u001b[47m\u001b[30m\u001b[1m\u001b[44m\u001b[37m 9 \u001b[30m\u001b[47m }                                    \u001b[22m\u001b[39m\u001b[49m\n\u001b[47m\u001b[30m\u001b[1m\u001b[22m\u001b[39m\u001b[49m')
+	t.is(result, '\u001b[47m\u001b[30m\u001b[1m\u001b[44m\u001b[37m 1 \u001b[30m\u001b[47m {                                    \u001b[22m\u001b[39m\u001b[49m\n\u001b[47m\u001b[30m\u001b[1m\u001b[44m\u001b[37m 2 \u001b[30m\u001b[47m     \u001b[30mfoo:\u001b[30m \u001b[30m\'bar\'\u001b[30m,                      \u001b[22m\u001b[39m\u001b[49m\n\u001b[47m\u001b[30m\u001b[1m\u001b[44m\u001b[37m 3 \u001b[30m\u001b[47m     \u001b[30mbaz:\u001b[30m \u001b[34m\u001b[2m1337\u001b[1m\u001b[30m,                       \u001b[22m\u001b[39m\u001b[49m\n\u001b[47m\u001b[30m\u001b[1m\u001b[44m\u001b[37m 4 \u001b[30m\u001b[47m     \u001b[30mqux:\u001b[30m \u001b[34mtrue\u001b[30m,                       \u001b[22m\u001b[39m\u001b[49m\n\u001b[47m\u001b[30m\u001b[1m\u001b[44m\u001b[37m 5 \u001b[30m\u001b[47m     \u001b[30mzxc:\u001b[30m \u001b[34mnull\u001b[30m,                       \u001b[22m\u001b[39m\u001b[49m\n\u001b[47m\u001b[30m\u001b[1m\u001b[44m\u001b[37m 6 \u001b[30m\u001b[47m     \u001b[36m\'foogle-bork\':\u001b[30m \u001b[30m\u001b[30m\u001b[31mfunction\u001b[30m (\u001b[30ma, b\u001b[30m) \u001b[30m{ \u001b[22m\u001b[39m\u001b[49m\n\u001b[47m\u001b[30m\u001b[1m\u001b[44m\u001b[37m 7 \u001b[30m\u001b[47m         \u001b[31mreturn\u001b[30m b - a;                \u001b[22m\u001b[39m\u001b[49m\n\u001b[47m\u001b[30m\u001b[1m\u001b[44m\u001b[37m 8 \u001b[30m\u001b[47m     }\u001b[30m                                \u001b[22m\u001b[39m\u001b[49m\n\u001b[47m\u001b[30m\u001b[1m\u001b[44m\u001b[37m 9 \u001b[30m\u001b[47m }                                    \u001b[22m\u001b[39m\u001b[49m\n\u001b[47m\u001b[30m\u001b[1m\u001b[22m\u001b[39m\u001b[49m')
 })
 
 test('Preserve tabs with background colors and line numbers', t => {
@@ -216,7 +215,7 @@ test('Preserve tabs with background colors and line numbers', t => {
 		}
 	}
 	const result = chromafi(obj, options)
-	t.is(result, '\u001b[47m\u001b[30m\u001b[1m\u001b[44m\u001b[37m1000000000000000\u001b[30m\u001b[47m{                                       \u001b[22m\u001b[39m\u001b[49m\n\u001b[47m\u001b[30m\u001b[1m\u001b[44m\u001b[37m1000000000000001\u001b[30m\u001b[47m\t\u001b[30mfoo:\u001b[30m \u001b[30m\'bar\'\u001b[30m,                     \u001b[22m\u001b[39m\u001b[49m\n\u001b[47m\u001b[30m\u001b[1m\u001b[44m\u001b[37m1000000000000002\u001b[30m\u001b[47m\t\u001b[30mbaz:\u001b[30m \u001b[34m\u001b[2m1337\u001b[1m\u001b[30m,                      \u001b[22m\u001b[39m\u001b[49m\n\u001b[47m\u001b[30m\u001b[1m\u001b[44m\u001b[37m1000000000000003\u001b[30m\u001b[47m\t\u001b[30mqux:\u001b[30m \u001b[34mtrue\u001b[30m,                      \u001b[22m\u001b[39m\u001b[49m\n\u001b[47m\u001b[30m\u001b[1m\u001b[44m\u001b[37m1000000000000004\u001b[30m\u001b[47m\t\u001b[30mzxc:\u001b[30m \u001b[34mnull\u001b[30m,                      \u001b[22m\u001b[39m\u001b[49m\n\u001b[47m\u001b[30m\u001b[1m\u001b[44m\u001b[37m1000000000000005\u001b[30m\u001b[47m\t\u001b[36m\'foogle-bork\':\u001b[30m \u001b[30m\u001b[30m\u001b[31mfunction\u001b[30m (\u001b[30ma, b\u001b[30m) \u001b[30m{\u001b[30m\u001b[22m\u001b[39m\u001b[49m\n\u001b[47m\u001b[30m\u001b[1m\u001b[44m\u001b[37m1000000000000006\u001b[30m\u001b[47m\u001b[30m\t\t\u001b[31mreturn\u001b[30m b - a;\u001b[30m           \u001b[22m\u001b[39m\u001b[49m\n\u001b[47m\u001b[30m\u001b[1m\u001b[44m\u001b[37m1000000000000007\u001b[30m\u001b[47m\u001b[30m\t}\u001b[30m                               \u001b[22m\u001b[39m\u001b[49m\n\u001b[47m\u001b[30m\u001b[1m\u001b[44m\u001b[37m1000000000000008\u001b[30m\u001b[47m}                                       \u001b[22m\u001b[39m\u001b[49m\n\u001b[47m\u001b[30m\u001b[1m\u001b[22m\u001b[39m\u001b[49m')
+	t.is(result, '\u001b[47m\u001b[30m\u001b[1m\u001b[44m\u001b[37m1000000000000000\u001b[30m\u001b[47m{                                       \u001b[22m\u001b[39m\u001b[49m\n\u001b[47m\u001b[30m\u001b[1m\u001b[44m\u001b[37m1000000000000001\u001b[30m\u001b[47m\t\u001b[30mfoo:\u001b[30m \u001b[30m\'bar\'\u001b[30m,                     \u001b[22m\u001b[39m\u001b[49m\n\u001b[47m\u001b[30m\u001b[1m\u001b[44m\u001b[37m1000000000000002\u001b[30m\u001b[47m\t\u001b[30mbaz:\u001b[30m \u001b[34m\u001b[2m1337\u001b[1m\u001b[30m,                      \u001b[22m\u001b[39m\u001b[49m\n\u001b[47m\u001b[30m\u001b[1m\u001b[44m\u001b[37m1000000000000003\u001b[30m\u001b[47m\t\u001b[30mqux:\u001b[30m \u001b[34mtrue\u001b[30m,                      \u001b[22m\u001b[39m\u001b[49m\n\u001b[47m\u001b[30m\u001b[1m\u001b[44m\u001b[37m1000000000000004\u001b[30m\u001b[47m\t\u001b[30mzxc:\u001b[30m \u001b[34mnull\u001b[30m,                      \u001b[22m\u001b[39m\u001b[49m\n\u001b[47m\u001b[30m\u001b[1m\u001b[44m\u001b[37m1000000000000005\u001b[30m\u001b[47m\t\u001b[36m\'foogle-bork\':\u001b[30m \u001b[30m\u001b[30m\u001b[31mfunction\u001b[30m (\u001b[30ma, b\u001b[30m) \u001b[30m{\u001b[22m\u001b[39m\u001b[49m\n\u001b[47m\u001b[30m\u001b[1m\u001b[44m\u001b[37m1000000000000006\u001b[30m\u001b[47m\t\t\u001b[31mreturn\u001b[30m b - a;           \u001b[22m\u001b[39m\u001b[49m\n\u001b[47m\u001b[30m\u001b[1m\u001b[44m\u001b[37m1000000000000007\u001b[30m\u001b[47m\t}\u001b[30m                               \u001b[22m\u001b[39m\u001b[49m\n\u001b[47m\u001b[30m\u001b[1m\u001b[44m\u001b[37m1000000000000008\u001b[30m\u001b[47m}                                       \u001b[22m\u001b[39m\u001b[49m\n\u001b[47m\u001b[30m\u001b[1m\u001b[22m\u001b[39m\u001b[49m')
 })
 
 test('Preserve tabs with background colors w/o line numbers', t => {
@@ -250,7 +249,7 @@ test('Preserve tabs with background colors w/o line numbers', t => {
 		}
 	}
 	const result = chromafi(obj, options)
-	t.is(result, '\u001b[47m\u001b[30m\u001b[1m{                                       \u001b[22m\u001b[39m\u001b[49m\n\u001b[47m\u001b[30m\u001b[1m\t\u001b[30mfoo:\u001b[30m \u001b[30m\'bar\'\u001b[30m,                     \u001b[22m\u001b[39m\u001b[49m\n\u001b[47m\u001b[30m\u001b[1m\t\u001b[30mbaz:\u001b[30m \u001b[34m\u001b[2m1337\u001b[1m\u001b[30m,                      \u001b[22m\u001b[39m\u001b[49m\n\u001b[47m\u001b[30m\u001b[1m\t\u001b[30mqux:\u001b[30m \u001b[34mtrue\u001b[30m,                      \u001b[22m\u001b[39m\u001b[49m\n\u001b[47m\u001b[30m\u001b[1m\t\u001b[30mzxc:\u001b[30m \u001b[34mnull\u001b[30m,                      \u001b[22m\u001b[39m\u001b[49m\n\u001b[47m\u001b[30m\u001b[1m\t\u001b[36m\'foogle-bork\':\u001b[30m \u001b[30m\u001b[30m\u001b[31mfunction\u001b[30m (\u001b[30ma, b\u001b[30m) \u001b[30m{\u001b[30m\u001b[22m\u001b[39m\u001b[49m\n\u001b[47m\u001b[30m\u001b[1m\u001b[30m\t\t\u001b[31mreturn\u001b[30m b - a;\u001b[30m           \u001b[22m\u001b[39m\u001b[49m\n\u001b[47m\u001b[30m\u001b[1m\u001b[30m\t}\u001b[30m                               \u001b[22m\u001b[39m\u001b[49m\n\u001b[47m\u001b[30m\u001b[1m}                                       \u001b[22m\u001b[39m\u001b[49m\n\u001b[47m\u001b[30m\u001b[1m\u001b[22m\u001b[39m\u001b[49m')
+	t.is(result, '\u001b[47m\u001b[30m\u001b[1m{                                       \u001b[22m\u001b[39m\u001b[49m\n\u001b[47m\u001b[30m\u001b[1m\t\u001b[30mfoo:\u001b[30m \u001b[30m\'bar\'\u001b[30m,                     \u001b[22m\u001b[39m\u001b[49m\n\u001b[47m\u001b[30m\u001b[1m\t\u001b[30mbaz:\u001b[30m \u001b[34m\u001b[2m1337\u001b[1m\u001b[30m,                      \u001b[22m\u001b[39m\u001b[49m\n\u001b[47m\u001b[30m\u001b[1m\t\u001b[30mqux:\u001b[30m \u001b[34mtrue\u001b[30m,                      \u001b[22m\u001b[39m\u001b[49m\n\u001b[47m\u001b[30m\u001b[1m\t\u001b[30mzxc:\u001b[30m \u001b[34mnull\u001b[30m,                      \u001b[22m\u001b[39m\u001b[49m\n\u001b[47m\u001b[30m\u001b[1m\t\u001b[36m\'foogle-bork\':\u001b[30m \u001b[30m\u001b[30m\u001b[31mfunction\u001b[30m (\u001b[30ma, b\u001b[30m) \u001b[30m{\u001b[22m\u001b[39m\u001b[49m\n\u001b[47m\u001b[30m\u001b[1m\t\t\u001b[31mreturn\u001b[30m b - a;           \u001b[22m\u001b[39m\u001b[49m\n\u001b[47m\u001b[30m\u001b[1m\t}\u001b[30m                               \u001b[22m\u001b[39m\u001b[49m\n\u001b[47m\u001b[30m\u001b[1m}                                       \u001b[22m\u001b[39m\u001b[49m\n\u001b[47m\u001b[30m\u001b[1m\u001b[22m\u001b[39m\u001b[49m')
 })
 
 test('TabsToSpaces=2, w/ bgColor', t => {
@@ -285,7 +284,7 @@ test('TabsToSpaces=2, w/ bgColor', t => {
 		}
 	}
 	const result = chromafi(obj, options)
-	t.is(result, '\u001b[47m\u001b[30m\u001b[1m\u001b[44m\u001b[37m 1 \u001b[30m\u001b[47m {                                  \u001b[22m\u001b[39m\u001b[49m\n\u001b[47m\u001b[30m\u001b[1m\u001b[44m\u001b[37m 2 \u001b[30m\u001b[47m   \u001b[30mfoo:\u001b[30m \u001b[30m\'bar\'\u001b[30m,                      \u001b[22m\u001b[39m\u001b[49m\n\u001b[47m\u001b[30m\u001b[1m\u001b[44m\u001b[37m 3 \u001b[30m\u001b[47m   \u001b[30mbaz:\u001b[30m \u001b[34m\u001b[2m1337\u001b[1m\u001b[30m,                       \u001b[22m\u001b[39m\u001b[49m\n\u001b[47m\u001b[30m\u001b[1m\u001b[44m\u001b[37m 4 \u001b[30m\u001b[47m   \u001b[30mqux:\u001b[30m \u001b[34mtrue\u001b[30m,                       \u001b[22m\u001b[39m\u001b[49m\n\u001b[47m\u001b[30m\u001b[1m\u001b[44m\u001b[37m 5 \u001b[30m\u001b[47m   \u001b[30mzxc:\u001b[30m \u001b[34mnull\u001b[30m,                       \u001b[22m\u001b[39m\u001b[49m\n\u001b[47m\u001b[30m\u001b[1m\u001b[44m\u001b[37m 6 \u001b[30m\u001b[47m   \u001b[36m\'foogle-bork\':\u001b[30m \u001b[30m\u001b[30m\u001b[31mfunction\u001b[30m (\u001b[30ma, b\u001b[30m) \u001b[30m{\u001b[30m \u001b[22m\u001b[39m\u001b[49m\n\u001b[47m\u001b[30m\u001b[1m\u001b[44m\u001b[37m 7 \u001b[30m\u001b[47m \u001b[30m    \u001b[31mreturn\u001b[30m b - a;\u001b[30m                  \u001b[22m\u001b[39m\u001b[49m\n\u001b[47m\u001b[30m\u001b[1m\u001b[44m\u001b[37m 8 \u001b[30m\u001b[47m \u001b[30m  }\u001b[30m                                \u001b[22m\u001b[39m\u001b[49m\n\u001b[47m\u001b[30m\u001b[1m\u001b[44m\u001b[37m 9 \u001b[30m\u001b[47m }                                  \u001b[22m\u001b[39m\u001b[49m\n\u001b[47m\u001b[30m\u001b[1m\u001b[22m\u001b[39m\u001b[49m')
+	t.is(result, '\u001b[47m\u001b[30m\u001b[1m\u001b[44m\u001b[37m 1 \u001b[30m\u001b[47m {                                  \u001b[22m\u001b[39m\u001b[49m\n\u001b[47m\u001b[30m\u001b[1m\u001b[44m\u001b[37m 2 \u001b[30m\u001b[47m   \u001b[30mfoo:\u001b[30m \u001b[30m\'bar\'\u001b[30m,                      \u001b[22m\u001b[39m\u001b[49m\n\u001b[47m\u001b[30m\u001b[1m\u001b[44m\u001b[37m 3 \u001b[30m\u001b[47m   \u001b[30mbaz:\u001b[30m \u001b[34m\u001b[2m1337\u001b[1m\u001b[30m,                       \u001b[22m\u001b[39m\u001b[49m\n\u001b[47m\u001b[30m\u001b[1m\u001b[44m\u001b[37m 4 \u001b[30m\u001b[47m   \u001b[30mqux:\u001b[30m \u001b[34mtrue\u001b[30m,                       \u001b[22m\u001b[39m\u001b[49m\n\u001b[47m\u001b[30m\u001b[1m\u001b[44m\u001b[37m 5 \u001b[30m\u001b[47m   \u001b[30mzxc:\u001b[30m \u001b[34mnull\u001b[30m,                       \u001b[22m\u001b[39m\u001b[49m\n\u001b[47m\u001b[30m\u001b[1m\u001b[44m\u001b[37m 6 \u001b[30m\u001b[47m   \u001b[36m\'foogle-bork\':\u001b[30m \u001b[30m\u001b[30m\u001b[31mfunction\u001b[30m (\u001b[30ma, b\u001b[30m) \u001b[30m{ \u001b[22m\u001b[39m\u001b[49m\n\u001b[47m\u001b[30m\u001b[1m\u001b[44m\u001b[37m 7 \u001b[30m\u001b[47m     \u001b[31mreturn\u001b[30m b - a;                  \u001b[22m\u001b[39m\u001b[49m\n\u001b[47m\u001b[30m\u001b[1m\u001b[44m\u001b[37m 8 \u001b[30m\u001b[47m   }\u001b[30m                                \u001b[22m\u001b[39m\u001b[49m\n\u001b[47m\u001b[30m\u001b[1m\u001b[44m\u001b[37m 9 \u001b[30m\u001b[47m }                                  \u001b[22m\u001b[39m\u001b[49m\n\u001b[47m\u001b[30m\u001b[1m\u001b[22m\u001b[39m\u001b[49m')
 })
 
 test('No padding (line or number), tabsToSpaces=2', t => {
@@ -412,4 +411,64 @@ test('Should throw if type !<fn|string|obj>', t => {
 
 	t.is(error.message, '🦅  Chromafi: You must pass a function, string or object.')
 })
+
+/* eslint-disable indent, no-unused-vars, object-shorthand */
+test('Should re-align indentation at multiple levels', t => {
+const lvl0 = opts => {
+const obj = {
+	foobar: 1337,
+	'baz-qux': function (a, b) {
+		return 'Wombat!'
+	}
+}
+return chromafi(obj, opts)
+}
+
+	const lvl1 = opts => {
+	const obj = {
+		foobar: 1337,
+		'baz-qux': function (a, b) {
+			return 'Wombat!'
+		}
+	}
+	return chromafi(obj, opts)
+	}
+
+	const lvl2 = opts => {
+		return (() => {
+			const obj = {
+				foobar: 1337,
+				'baz-qux': function (a, b) {
+					return 'Wombat!'
+				}
+			}
+			return chromafi(obj, opts)
+		})()
+	}
+
+	const opts = {
+		lineNumberPad: 0,
+		lineNumbers: 0,
+		codePad: 0
+	}
+
+	const spaces = Object.assign({}, opts, {tabsToSpaces: 4})
+	const tabs = Object.assign({}, opts, {tabsToSpaces: false})
+
+	const spacesOutput = [
+		lvl0(spaces),
+		lvl1(spaces),
+		lvl2(spaces)
+	].join('\n')
+
+	const tabsOutput = [
+		lvl0(tabs),
+		lvl1(tabs),
+		lvl2(tabs)
+	].join('\n')
+
+	t.is(spacesOutput, '\u001b[37m{                               \u001b[39m\n\u001b[37m    \u001b[33mfoobar:\u001b[37m \u001b[32m1337\u001b[37m,               \u001b[39m\n\u001b[37m    \u001b[36m\'baz-qux\':\u001b[37m \u001b[37m\u001b[37m\u001b[31mfunction\u001b[37m (\u001b[34ma, b\u001b[37m) \u001b[37m{\u001b[39m\n\u001b[37m        \u001b[31mreturn\u001b[37m \u001b[33m\'Wombat!\'\u001b[37m;       \u001b[39m\n\u001b[37m    }\u001b[37m                           \u001b[39m\n\u001b[37m}                               \u001b[39m\n\u001b[37m\u001b[39m\n\u001b[37m{                               \u001b[39m\n\u001b[37m    \u001b[33mfoobar:\u001b[37m \u001b[32m1337\u001b[37m,               \u001b[39m\n\u001b[37m    \u001b[36m\'baz-qux\':\u001b[37m \u001b[37m\u001b[37m\u001b[31mfunction\u001b[37m (\u001b[34ma, b\u001b[37m) \u001b[37m{\u001b[39m\n\u001b[37m        \u001b[31mreturn\u001b[37m \u001b[33m\'Wombat!\'\u001b[37m;       \u001b[39m\n\u001b[37m    }\u001b[37m                           \u001b[39m\n\u001b[37m}                               \u001b[39m\n\u001b[37m\u001b[39m\n\u001b[37m{                               \u001b[39m\n\u001b[37m    \u001b[33mfoobar:\u001b[37m \u001b[32m1337\u001b[37m,               \u001b[39m\n\u001b[37m    \u001b[36m\'baz-qux\':\u001b[37m \u001b[37m\u001b[37m\u001b[31mfunction\u001b[37m (\u001b[34ma, b\u001b[37m) \u001b[37m{\u001b[39m\n\u001b[37m        \u001b[31mreturn\u001b[37m \u001b[33m\'Wombat!\'\u001b[37m;       \u001b[39m\n\u001b[37m    }\u001b[37m                           \u001b[39m\n\u001b[37m}                               \u001b[39m\n\u001b[37m\u001b[39m')
+	t.is(tabsOutput, '\u001b[37m{                                   \u001b[39m\n\u001b[37m\t\u001b[33mfoobar:\u001b[37m \u001b[32m1337\u001b[37m,               \u001b[39m\n\u001b[37m\t\u001b[36m\'baz-qux\':\u001b[37m \u001b[37m\u001b[37m\u001b[31mfunction\u001b[37m (\u001b[34ma, b\u001b[37m) \u001b[37m{\u001b[39m\n\u001b[37m\t\t\u001b[31mreturn\u001b[37m \u001b[33m\'Wombat!\'\u001b[37m;   \u001b[39m\n\u001b[37m\t}\u001b[37m                           \u001b[39m\n\u001b[37m}                                   \u001b[39m\n\u001b[37m\u001b[39m\n\u001b[37m{                                   \u001b[39m\n\u001b[37m\t\u001b[33mfoobar:\u001b[37m \u001b[32m1337\u001b[37m,               \u001b[39m\n\u001b[37m\t\u001b[36m\'baz-qux\':\u001b[37m \u001b[37m\u001b[37m\u001b[31mfunction\u001b[37m (\u001b[34ma, b\u001b[37m) \u001b[37m{\u001b[39m\n\u001b[37m\t\t\u001b[31mreturn\u001b[37m \u001b[33m\'Wombat!\'\u001b[37m;   \u001b[39m\n\u001b[37m\t}\u001b[37m                           \u001b[39m\n\u001b[37m}                                   \u001b[39m\n\u001b[37m\u001b[39m\n\u001b[37m{                                   \u001b[39m\n\u001b[37m\t\u001b[33mfoobar:\u001b[37m \u001b[32m1337\u001b[37m,               \u001b[39m\n\u001b[37m\t\u001b[36m\'baz-qux\':\u001b[37m \u001b[37m\u001b[37m\u001b[31mfunction\u001b[37m (\u001b[34ma, b\u001b[37m) \u001b[37m{\u001b[39m\n\u001b[37m\t\t\u001b[31mreturn\u001b[37m \u001b[33m\'Wombat!\'\u001b[37m;   \u001b[39m\n\u001b[37m\t}\u001b[37m                           \u001b[39m\n\u001b[37m}                                   \u001b[39m\n\u001b[37m\u001b[39m')
+})
+/* eslint-enable */
 
