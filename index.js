@@ -1,11 +1,12 @@
 const hljs = require('highlight.js')
 const cheerio = require('cheerio')
+const camelCase = require('camelcase')
 const chalk = require('chalk')
 const stripAnsi = require('strip-ansi')
 const merge = require('deepmerge')
 const ansiMark = require('ansi-mark')
 const stripIndent = require('strip-indent')
-const camelCase = require('camelcase')
+const detectIndent = require('detect-indent')
 
 const darkPalette = {
 	base: chalk.white,
@@ -161,19 +162,13 @@ const syntaxHlJson = (json, opts) => {
 			} else {
 				colorClass = 'string'
 
-				match = match.replace(/"/g, '\'')
-					.replace(/\\n/g, '\n')
-					.replace(/\\t/g, indentStr)
-
 				if (match.substr(1, 10) === '[FUNCTION]' &&
 					match.substr(match.length - 11, 10) === '[FUNCTION]') {
-					match = match.substr(11, match.length - 22)
-					const indentStart = true
-					match = syntaxHlStr('javascript', match, opts, indentStart)
-					match = stripIndent(match)
-					// Remove leading indent to line up member-name w/ fn
-					match = match.replace(/^\s*/, '')
 					colorClass = 'function'
+				} else {
+					match = match.replace(/"/g, '\'')
+					match = match.replace(/\\n/g, '\n')
+					match = match.replace(/\\t/g, indentStr)
 				}
 			}
 		} else if (/true|false/.test(match)) {
@@ -185,7 +180,59 @@ const syntaxHlJson = (json, opts) => {
 		return opts.colors[colorClass](match)
 	})
 
-	return highlighted
+	const getFnStrIndent = (fnStr, opts) => {
+		fnStr = fnStr.replace(/\t/g, indentStr)
+		const indent = detectIndent(fnStr)
+
+		if (opts.$indent.spaces) {
+			const indentLevel = indent.amount / opts.tabsToSpaces
+			return indentLevel
+		}
+
+		if (opts.$indent.tabs) {
+			const indentLevel = indent.amount
+			return indentLevel
+		}
+	}
+
+	const lines = highlighted.split('\n').map(line => {
+		const fnParts = line.split('[FUNCTION]')
+		if (fnParts.length === 3) {
+			const plain = stripAnsi(line)
+
+			let outerIndent
+
+			if (opts.$indent.spaces) {
+				outerIndent = plain.match(/^[ \\t]*/)[0].length / opts.tabsToSpaces
+			}
+			if (opts.$indent.tabs) {
+				outerIndent = plain.match(/^\t*/)[0].length
+			}
+
+			const fnStr = fnParts[1]
+				.replace(/"/g, '\'')
+				.replace(/\\n/g, '\n')
+				.replace(/\\t/g, '\t')
+
+			const innerIndent = getFnStrIndent(fnStr, opts)
+			const indentOffset = Math.abs(outerIndent - (innerIndent - 1))
+
+			const re = new RegExp(`\n(\t){${indentOffset}}`, 'g')
+			const reTabbed = fnStr
+				.replace(re, '\n')
+				.replace(/\\t/g, indentStr)
+
+			const preFn = fnParts[0].substr(0, fnParts[0].length - 1)
+			const postFn = fnParts[2].substr(1)
+			const jsHighlighted = syntaxHlStr('javascript', reTabbed, opts)
+
+			return preFn + jsHighlighted + postFn
+		}
+
+		return line
+	}).join('\n')
+
+	return lines
 }
 
 const lineNumberPad = (number, opts) => {

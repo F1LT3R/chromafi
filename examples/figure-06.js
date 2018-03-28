@@ -1,4 +1,4 @@
-const chromafi = require('.')
+const chromafi = require('../.')
 
 const armAssemblyCode = `
 .text
