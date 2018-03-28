@@ -1,6 +1,6 @@
 {
 	"name": "chromafi",
-	"version": "2.0.1",
+	"version": "2.0.2",
 	"description": "🦅  cli syntax highlighting: any function - any object - 176 languages",
 	"main": "index.js",
 	"scripts": {

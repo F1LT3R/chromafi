@@ -9,7 +9,7 @@
 
 <img width="100%" src="chromafi-logo.png">
 
-![Figure 00](figure-00.png)
+![Figure 00](examples/figure-00.png)
 
 For years, JavaScripts around the web have committed monocrimes against humanity too horrible to mention. Our struggle ends today.
 
@@ -43,7 +43,7 @@ const chromatastic = chromafi(obj)
 console.log(chromatastic)
 ```
 
-![Figure 01](figure-01.png)
+![Figure 01](examples/figure-01.png)
 
 ### Chromafi a JavaScript Function
 
@@ -59,7 +59,7 @@ const chromantic = chromafi(add)
 console.log(chromantic)
 ```
 
-![Figure 02](figure-02.png)
+![Figure 02](examples/figure-02.png)
 
 ### Chromafi a String of Code
 
@@ -92,7 +92,7 @@ const chromadactic = chromafi(codeString)
 console.log(chromadactic)
 ```
 
-![Figure 03](figure-03.png)
+![Figure 03](examples/figure-03.png)
 
 ## Options
 
@@ -119,7 +119,7 @@ console.log(chromafanatic)
 
 ```
 
-![Figure 04](figure-04.png)
+![Figure 04](examples/figure-04.png)
 
 ## Light Color Scheme
 
@@ -163,7 +163,7 @@ const chromafantastic = chromafi(obj, {
 console.log(chromafantastic)
 ```
 
-![Figure 05](figure-05.png)
+![Figure 05](examples/figure-05.png)
 
 ## Highlighting Other Languages
 
@@ -218,7 +218,7 @@ const chromalicious = chromafi(armAssemblyCode, {lang: 'arm'})
 console.log(chromalicious)
 ```
 
-![Figure 06](figure-06.png)
+![Figure 06](examples/figure-06.png)
 
 ## Supported Languages
 
