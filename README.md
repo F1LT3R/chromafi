@@ -7,11 +7,17 @@
 
 > 🦅  cli syntax highlighting: any function - any object - 176 languages
 
-<img width="100%" src="chromafi-logo.png">
-
 ![Figure 00](examples/figure-00.png)
 
-For years, JavaScripts around the web have committed monocrimes against humanity too horrible to mention. Our struggle ends today.
+## Support
+
+Support the development of Chromafi by [becoming a patreon](https://patreon.com/bePatron?u=9720216).
+
+<a href="https://patreon.com/bePatron?u=9720216"><img width="120" src="https://f1lt3r.io/content/images/2018/04/become_a_patron_button@2x.png"></a>
+
+## Features
+
+<center><img width="360px" src="chromafi-logo.png"></center>
 
 * JavaScript objects that are logged to the console... still look like JavaScript objects.
 * Chromafi highlights JavaScript functions.
