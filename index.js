@@ -7,6 +7,7 @@ const merge = require('deepmerge')
 const ansiMark = require('ansi-mark')
 const stripIndent = require('strip-indent')
 const detectIndent = require('detect-indent')
+const safeJsonStringify = require('safe-json-stringify')
 
 const darkPalette = {
 	addition: chalk.green,
@@ -157,7 +158,7 @@ const syntaxHlJson = (json, opts) => {
 	const indentStr = getIndentStr(opts)
 
 	try {
-		json = JSON.stringify(json, (key, val) => {
+		json = safeJsonStringify(json, (key, val) => {
 			if (val instanceof Function) {
 				return `[FUNCTION]${String(val)}[FUNCTION]`
 			}
