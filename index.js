@@ -371,7 +371,7 @@ const procOpts = (opts = {}) => {
 	return options
 }
 
-const chromafi = (value, opts) => {
+let chromafi = (value, opts) => {
 	opts = procOpts(opts)
 
 	if (typeof value === 'function') {
@@ -397,5 +397,7 @@ const chromafi = (value, opts) => {
 
 	throw new Error('🦅  Chromafi: You must pass a function, string or object.')
 }
+
+chromafi.hljs = hljs; //expose hljs for modification
 
 module.exports = chromafi
