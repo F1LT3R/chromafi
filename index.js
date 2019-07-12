@@ -121,7 +121,6 @@ const getIndentStr = opts => {
 }
 
 const syntaxHlStr = (lang, script, opts, indentStart) => {
-
 	const indentStr = getIndentStr(opts)
 
 	if (opts.$indent.tabs) {
