@@ -142,7 +142,7 @@ const syntaxHlStr = (lang, script, opts, indentStart) => {
 	const $body = cheerio.load(html).root().find('code')[0]
 	const text = filter($body, opts)
 	output = text
-	if(output.endsWith('\n')) {
+	if (output.endsWith('\n')) {
 		output = output.slice(0, -1)
 	}
 
