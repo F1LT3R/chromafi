@@ -138,17 +138,13 @@ const syntaxHlStr = (lang, script, opts, indentStart) => {
 	}
 
 	const code = hljs.highlight(lang, script).value
-	const lines = code.split('\n')
-
-	lines.forEach((line, lineNumber) => {
-		const html = `<code>${line}</code>`
-		const $body = cheerio.load(html).root().find('code')[0]
-		const text = filter($body, opts)
-		output += text
-		if (lineNumber !== lines.length - 1) {
-			output += '\n'
-		}
-	})
+	const html = `<code>${code}</code>`
+	const $body = cheerio.load(html).root().find('code')[0]
+	const text = filter($body, opts)
+	output = text
+	if(output.endsWith('\n')) {
+		output = output.slice(0, -1)
+	}
 
 	return output
 }
