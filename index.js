@@ -102,9 +102,9 @@ const findLongestLine = (text, opts) => {
 	return max
 }
 
-const padLine = (line, padding) => {
+const padLine = (line, padding, trailingSpace) => {
 	const padStr = String().padStart(padding, ' ')
-	return padStr + line + padStr
+	return padStr + line + trailingSpace ? padStr : ''
 }
 
 const getIndentStr = opts => {
@@ -318,7 +318,7 @@ const cropPadAndNumber = (text, opts) => {
 		}
 
 		if (typeof opts.tabsToSpaces === 'number') {
-			lineOutput = lineNo + padLine(runLengthLine, opts.codePad)
+			lineOutput = lineNo + padLine(runLengthLine, opts.codePad, opts.trailingSpace)
 		}
 
 		output += lineOutput + '\n'
