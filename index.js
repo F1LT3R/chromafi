@@ -104,7 +104,7 @@ const findLongestLine = (text, opts) => {
 
 const padLine = (line, padding, trailingSpace) => {
 	const padStr = String().padStart(padding, ' ')
-	return padStr + line + trailingSpace ? padStr : ''
+	return padStr + line + (trailingSpace ? padStr : '')
 }
 
 const getIndentStr = opts => {
