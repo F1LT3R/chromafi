@@ -307,9 +307,9 @@ const cropPadAndNumber = (text, opts) => {
 
 		const plain = stripAnsi(line).replace(/\t/g, '')
 		const linePad = String().padEnd((longestLineLen - plain.length) - tabAdjust, ' ')
-		const runLengthLine = opts.trailingSpace
-			? line + opts.colors.trailingSpace(linePad)
-			: line
+		const runLengthLine = opts.trailingSpace ?
+			line + opts.colors.trailingSpace(linePad) :
+			line
 
 		let lineOutput
 
