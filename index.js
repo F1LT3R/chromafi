@@ -398,4 +398,6 @@ const chromafi = (value, opts) => {
 	throw new Error('🦅  Chromafi: You must pass a function, string or object.')
 }
 
+chromafi.hljs = hljs // Expose hljs for modification
+
 module.exports = chromafi
