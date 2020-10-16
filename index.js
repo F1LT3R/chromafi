@@ -102,9 +102,9 @@ const findLongestLine = (text, opts) => {
 	return max
 }
 
-const padLine = (line, padding) => {
+const padLine = (line, padding, trailingSpace) => {
 	const padStr = String().padStart(padding, ' ')
-	return padStr + line + padStr
+	return padStr + line + (trailingSpace ? padStr : '')
 }
 
 const getIndentStr = opts => {
@@ -307,7 +307,9 @@ const cropPadAndNumber = (text, opts) => {
 
 		const plain = stripAnsi(line).replace(/\t/g, '')
 		const linePad = String().padEnd((longestLineLen - plain.length) - tabAdjust, ' ')
-		const runLengthLine = line + opts.colors.trailingSpace(linePad)
+		const runLengthLine = opts.trailingSpace ?
+			line + opts.colors.trailingSpace(linePad) :
+			line
 
 		let lineOutput
 
@@ -316,7 +318,7 @@ const cropPadAndNumber = (text, opts) => {
 		}
 
 		if (typeof opts.tabsToSpaces === 'number') {
-			lineOutput = lineNo + padLine(runLengthLine, opts.codePad)
+			lineOutput = lineNo + padLine(runLengthLine, opts.codePad, opts.trailingSpace)
 		}
 
 		output += lineOutput + '\n'
@@ -356,7 +358,8 @@ const procOpts = (opts = {}) => {
 		colors: darkPalette,
 		tabsToSpaces: 4,
 		consoleTabWidth: 8,
-		arrowKeyword: 'const'
+		arrowKeyword: 'const',
+		trailingSpace: true
 	}
 
 	options = merge(options, opts)
