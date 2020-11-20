@@ -1,19 +1,15 @@
 # Chromafi
 
-[![Build Status](https://travis-ci.org/F1LT3R/chromafi.svg?branch=master)](https://travis-ci.org/F1LT3R/chromafi)
-[![Coverage Status](https://coveralls.io/repos/github/F1LT3R/chromafi/badge.svg?branch=master)](https://coveralls.io/github/F1LT3R/chromafi?branch=master)
-[![Npm Version](https://img.shields.io/npm/v/chromafi.svg)](https://www.npmjs.com/package/chromafi)
-[![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/sindresorhus/xo)
-
 > 🦅  cli syntax highlighting: any function - any object - 176 languages
+> **Forked from [chromafi](https://github.com/F1LT3R/chromafi) to maintain dependencies, as a separate project.**
 
 ![Figure 00](examples/figure-00.png)
 
-## Support
+## Installation
 
-Support the development of Chromafi by [becoming a patreon](https://patreon.com/bePatron?u=9720216).
-
-<a href="https://patreon.com/bePatron?u=9720216"><img width="120" src="https://f1lt3r.io/content/images/2018/04/become_a_patron_button@2x.png"></a>
+```sh
+$ npm install @12core/chromafi
+```
 
 ## Features
 

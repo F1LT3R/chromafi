@@ -1,16 +1,14 @@
-import test from 'ava'
-import chalk from 'chalk'
-import chromafi from '.'
+/* eslint-disable */
+const test = require('ava')
+const chalk = require('chalk')
+const chromafi = require('.')
 
 // Encode: provides escaped ansi sequence strings
 // that can be used as the expected result value
-// eslint-disable-next-line no-unused-vars
 const encode = result => {
-	// eslint-disable-next-line no-console
 	console.log(result)
 	const json = JSON.stringify(result)
 	const output = json.replace(/'/g, '\\\'')
-	// eslint-disable-next-line no-console
 	console.log(output)
 }
 
@@ -36,7 +34,6 @@ test('JavaScript object, preserve tabs, w/o lineNumbers', t => {
 		baz: 1337,
 		qux: true,
 		zxc: null,
-		// eslint-disable-next-line object-shorthand
 		'foogle-bork': function (a, b) {
 			return b - a
 		}
@@ -61,7 +58,6 @@ test('JavaScript object w/ deep functions', t => {
 				}
 			}
 		},
-		// eslint-disable-next-line object-shorthand
 		'foogle-bork': function (a, b) {
 			return b - a
 		}
@@ -156,7 +152,6 @@ test('Light background, tabsToSpaces', t => {
 		baz: 1337,
 		qux: true,
 		zxc: null,
-		// eslint-disable-next-line object-shorthand
 		'foogle-bork': function (a, b) {
 			return b - a
 		}
@@ -189,7 +184,6 @@ test('Preserve tabs with background colors and line numbers', t => {
 		baz: 1337,
 		qux: true,
 		zxc: null,
-		// eslint-disable-next-line object-shorthand
 		'foogle-bork': function (a, b) {
 			return b - a
 		}
@@ -224,7 +218,6 @@ test('Preserve tabs with background colors w/o line numbers', t => {
 		baz: 1337,
 		qux: true,
 		zxc: null,
-		// eslint-disable-next-line object-shorthand
 		'foogle-bork': function (a, b) {
 			return b - a
 		}
@@ -258,7 +251,6 @@ test('TabsToSpaces=2, w/ bgColor', t => {
 		baz: 1337,
 		qux: true,
 		zxc: null,
-		// eslint-disable-next-line object-shorthand
 		'foogle-bork': function (a, b) {
 			return b - a
 		}
@@ -304,7 +296,6 @@ test('No padding (line or number), tabsToSpaces=2', t => {
 })
 
 test('TabsToSpaces=0 (Zero-width indent) \\u0000', t => {
-	// eslint-disable-next-line quotes
 	const obj = {foobar: 1337, bax: {qux: {wombat: "BOO!"}}}
 
 	const options = {
@@ -359,7 +350,7 @@ test('Multiline highlight, replacing color', t => {
 })
 
 test('Single line highlight, replacing color', t => {
-	const html = `<div>Highlight me!</div>`
+	const html = '<div>Highlight me!</div>'
 
 	const result = chromafi(html, {
 		codePad: 0,
@@ -412,13 +403,12 @@ test('Should throw if type !<fn|string|obj>', t => {
 	t.is(error.message, '🦅  Chromafi: You must pass a function, string or object.')
 })
 
-/* eslint-disable indent, no-unused-vars, object-shorthand */
 test('Should re-align indentation at multiple levels', t => {
 const lvl0 = opts => {
 const obj = {
 	foobar: 1337,
 	'baz-qux': function (a, b) {
-		return 'Wombat!'
+		return 'Wombat!';
 	}
 }
 return chromafi(obj, opts)
@@ -428,7 +418,7 @@ return chromafi(obj, opts)
 	const obj = {
 		foobar: 1337,
 		'baz-qux': function (a, b) {
-			return 'Wombat!'
+			return 'Wombat!';
 		}
 	}
 	return chromafi(obj, opts)
@@ -439,7 +429,7 @@ return chromafi(obj, opts)
 			const obj = {
 				foobar: 1337,
 				'baz-qux': function (a, b) {
-					return 'Wombat!'
+					return 'Wombat!';
 				}
 			}
 			return chromafi(obj, opts)
@@ -470,11 +460,9 @@ return chromafi(obj, opts)
 	t.is(spacesOutput, '\u001b[37m{                               \u001b[39m\n\u001b[37m    \u001b[33mfoobar:\u001b[37m \u001b[32m1337\u001b[37m,               \u001b[39m\n\u001b[37m    \u001b[36m\'baz-qux\':\u001b[37m \u001b[37m\u001b[37m\u001b[31mfunction\u001b[37m (\u001b[34ma, b\u001b[37m) \u001b[37m{\u001b[39m\n\u001b[37m        \u001b[31mreturn\u001b[37m \u001b[33m\'Wombat!\'\u001b[37m;       \u001b[39m\n\u001b[37m    }\u001b[37m                           \u001b[39m\n\u001b[37m}                               \u001b[39m\n\u001b[37m\u001b[39m\n\u001b[37m{                               \u001b[39m\n\u001b[37m    \u001b[33mfoobar:\u001b[37m \u001b[32m1337\u001b[37m,               \u001b[39m\n\u001b[37m    \u001b[36m\'baz-qux\':\u001b[37m \u001b[37m\u001b[37m\u001b[31mfunction\u001b[37m (\u001b[34ma, b\u001b[37m) \u001b[37m{\u001b[39m\n\u001b[37m        \u001b[31mreturn\u001b[37m \u001b[33m\'Wombat!\'\u001b[37m;       \u001b[39m\n\u001b[37m    }\u001b[37m                           \u001b[39m\n\u001b[37m}                               \u001b[39m\n\u001b[37m\u001b[39m\n\u001b[37m{                               \u001b[39m\n\u001b[37m    \u001b[33mfoobar:\u001b[37m \u001b[32m1337\u001b[37m,               \u001b[39m\n\u001b[37m    \u001b[36m\'baz-qux\':\u001b[37m \u001b[37m\u001b[37m\u001b[31mfunction\u001b[37m (\u001b[34ma, b\u001b[37m) \u001b[37m{\u001b[39m\n\u001b[37m        \u001b[31mreturn\u001b[37m \u001b[33m\'Wombat!\'\u001b[37m;       \u001b[39m\n\u001b[37m    }\u001b[37m                           \u001b[39m\n\u001b[37m}                               \u001b[39m\n\u001b[37m\u001b[39m')
 	t.is(tabsOutput, '\u001b[37m{                                   \u001b[39m\n\u001b[37m\t\u001b[33mfoobar:\u001b[37m \u001b[32m1337\u001b[37m,               \u001b[39m\n\u001b[37m\t\u001b[36m\'baz-qux\':\u001b[37m \u001b[37m\u001b[37m\u001b[31mfunction\u001b[37m (\u001b[34ma, b\u001b[37m) \u001b[37m{\u001b[39m\n\u001b[37m\t\t\u001b[31mreturn\u001b[37m \u001b[33m\'Wombat!\'\u001b[37m;   \u001b[39m\n\u001b[37m\t}\u001b[37m                           \u001b[39m\n\u001b[37m}                                   \u001b[39m\n\u001b[37m\u001b[39m\n\u001b[37m{                                   \u001b[39m\n\u001b[37m\t\u001b[33mfoobar:\u001b[37m \u001b[32m1337\u001b[37m,               \u001b[39m\n\u001b[37m\t\u001b[36m\'baz-qux\':\u001b[37m \u001b[37m\u001b[37m\u001b[31mfunction\u001b[37m (\u001b[34ma, b\u001b[37m) \u001b[37m{\u001b[39m\n\u001b[37m\t\t\u001b[31mreturn\u001b[37m \u001b[33m\'Wombat!\'\u001b[37m;   \u001b[39m\n\u001b[37m\t}\u001b[37m                           \u001b[39m\n\u001b[37m}                                   \u001b[39m\n\u001b[37m\u001b[39m\n\u001b[37m{                                   \u001b[39m\n\u001b[37m\t\u001b[33mfoobar:\u001b[37m \u001b[32m1337\u001b[37m,               \u001b[39m\n\u001b[37m\t\u001b[36m\'baz-qux\':\u001b[37m \u001b[37m\u001b[37m\u001b[31mfunction\u001b[37m (\u001b[34ma, b\u001b[37m) \u001b[37m{\u001b[39m\n\u001b[37m\t\t\u001b[31mreturn\u001b[37m \u001b[33m\'Wombat!\'\u001b[37m;   \u001b[39m\n\u001b[37m\t}\u001b[37m                           \u001b[39m\n\u001b[37m}                                   \u001b[39m\n\u001b[37m\u001b[39m')
 })
-/* eslint-enable */
 
 test('Diff', t => {
 // Credit: https://www.git-tower.com/learn/git/ebook/en/command-line/advanced-topics/diffs
-// eslint-disable-next-line indent
 const diff = `diff --git a/about.html b/about.html
 index d09ab79..0c20c33 100644
 --- a/about.html

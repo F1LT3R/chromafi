@@ -1,5 +1,5 @@
 {
-	"name": "chromafi",
+	"name": "@12core/chromafi",
 	"version": "2.1.0",
 	"description": "🦅  cli syntax highlighting: any function - any object - 176 languages",
 	"main": "index.js",
@@ -14,37 +14,43 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git@github.com:f1lt3r/chromafi.git"
+		"url": "git@github.com:little-core-labs/chromafi.git"
 	},
 	"dependencies": {
 		"ansi-mark": "^1.0.0",
-		"ansi-regex": "^3.0.0",
-		"array-uniq": "^1.0.3",
-		"camelcase": "^4.1.0",
-		"chalk": "^2.3.2",
+		"ansi-regex": "^5.0.0",
+		"array-uniq": "^2.1.0",
+		"camelcase": "^6.2.0",
+		"chalk": "^4.1.0",
 		"cheerio": "^1.0.0-rc.2",
-		"deepmerge": "^2.1.0",
-		"detect-indent": "^5.0.0",
+		"deepmerge": "^4.2.2",
+		"detect-indent": "^6.0.0",
 		"he": "^1.1.1",
-		"highlight.js": "^9.12.0",
+		"highlight.js": "^10.4.0",
 		"min-indent": "^1.0.0",
-		"strip-ansi": "^4.0.0",
-		"strip-indent": "^2.0.0",
+		"strip-ansi": "^6.0.0",
+		"strip-indent": "^3.0.0",
 		"super-split": "^1.1.0"
 	},
 	"devDependencies": {
-		"ava": "^0.25.0",
+		"ava": "^3.13.0",
 		"coveralls": "^3.0.0",
 		"husky": "^0.14.3",
-		"nyc": "^11.6.0",
-		"xo": "^0.20.3"
+		"nyc": "^15.1.0",
+		"xo": "^0.35.0"
 	},
 	"xo": {
 		"esnext": true,
 		"semicolon": false,
 		"rules": {
+      "indent": ["error", 2],
 			"no-console": 1,
 			"space-before-function-paren": 0,
+      "unicorn/no-abusive-eslint-disable": 0,
+      "unicorn/prevent-abbreviations": 0,
+      "unicorn/prefer-string-slice": 0,
+      "unicorn/catch-error-name": 0,
+      "unicorn/better-regex": 0,
 			"unicorn/escape-case": 0
 		},
 		"ignores": [
@@ -247,5 +253,5 @@
 	],
 	"author": "F1LT3R",
 	"license": "MIT",
-	"homepage": "https://github.com/f1lt3r/chromafi#readme"
+	"homepage": "https://github.com/little-core-labs/chromafi#readme"
 }
