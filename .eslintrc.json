@@ -1,0 +1,3 @@
+{
+  "extends": "@12core/eslint-config-12core"
+}

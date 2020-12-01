@@ -172,9 +172,7 @@ const syntaxHlJson = (json, opts) => {
   const highlighted = json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+-]?\d+)?)/g, match => {
     let colorClass = 'number'
 
-    // eslint-disable-next-line unicorn/prefer-starts-ends-with
     if (/^"/.test(match)) {
-      // eslint-disable-next-line unicorn/prefer-starts-ends-with
       if (/:$/.test(match)) {
         if (match.includes('-')) {
           colorClass = 'attrString'
