@@ -4,7 +4,9 @@
   "description": "🦅  cli syntax highlighting: any function - any object - 176 languages",
   "main": "index.js",
   "scripts": {
-    "test": "eslint --ext .js . && ava"
+    "test": "eslint --ext .js . && ava",
+    "prepublishOnly": "git push --follow-tags && gh-release -y",
+    "version": "auto-changelog -p --template keepachangelog auto-changelog --breaking-pattern 'BREAKING CHANGE:' && git add CHANGELOG.md"
   },
   "repository": {
     "type": "git",
@@ -29,7 +31,10 @@
   "devDependencies": {
     "@12core/eslint-config-12core": "^3.0.0",
     "ava": "^3.13.0",
-    "eslint": "^7.14.0"
+    "eslint": "^7.14.0",
+    "auto-changelog": "^2.2.0",
+    "gh-release": "^4.0.0",
+    "npm-run-all2": "^5.0.0"
   },
   "ava": {
     "failfast": true
