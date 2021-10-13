@@ -49,9 +49,11 @@ const darkPalette = {
 	templateTag: chalk.magenta,
 	templateVariable: chalk.green,
 	title: chalk.green,
+	titleFunction: chalk.green,
 	trailingSpace: chalk,
 	type: chalk.magenta,
-	variable: chalk.red
+	variable: chalk.red,
+	variableLanguage: chalk.red
 }
 
 const filter = (node, opts) => {
@@ -138,7 +140,7 @@ const syntaxHlStr = (lang, script, opts, indentStart) => {
 		script = indentStr + script
 	}
 
-	const code = hljs.highlight(lang, script).value
+	const code = hljs.highlight(script, { language:lang }).value
 	const lines = code.split('\n')
 
 	lines.forEach((line, lineNumber) => {

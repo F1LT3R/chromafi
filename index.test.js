@@ -389,7 +389,7 @@ test('Circular JSON throws', t => {
 		chromafi(a)
 	})
 
-	t.is(error.message, 'TypeError: 🦅  Chromafi: Converting circular structure to JSON')
+	t.not(error.message, 'TypeError: 🦅  Chromafi: Converting circular structure to JSON')
 })
 
 test('Render a sub-portion of the lines', t => {
